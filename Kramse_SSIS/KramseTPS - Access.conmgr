@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="KramseTPS - Access"
+  DTS:DTSID="{FE2D80C8-F6DB-4EFD-BF69-B7CC851D7725}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=C:\Users\VossB\source\repos\Kramse_SSIS\sources\KramseTPS.mdb;Provider=Microsoft.ACE.OLEDB.16.0;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
