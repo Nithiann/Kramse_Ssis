@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="2  Raw to ERP"
   DTS:PackageType="5"
-  DTS:VersionBuild="114"
-  DTS:VersionGUID="{DCE757C3-3AB9-485E-9D40-485A60D486BA}">
+  DTS:VersionBuild="115"
+  DTS:VersionGUID="{F4C74546-9C14-46A6-80B2-86486277807F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -2760,13 +2760,6 @@ where [refTable].[Country] = ?</property>
                       externalMetadataColumnId="Package\Load Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_PortName]"
                       lineageId="Package\Load Port\OLE DB Source.Outputs[OLE DB Source Output].Columns[P_PortName]" />
                     <inputColumn
-                      refId="Package\Load Port\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[P_Country]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="P_Country"
-                      externalMetadataColumnId="Package\Load Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_Country]"
-                      lineageId="Package\Load Port\OLE DB Source.Outputs[OLE DB Source Output].Columns[P_Country]" />
-                    <inputColumn
                       refId="Package\Load Port\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DistanceFromOsloSeaMiles]"
                       cachedDataType="r8"
                       cachedName="DistanceFromOsloSeaMiles"
@@ -2778,6 +2771,13 @@ where [refTable].[Country] = ?</property>
                       cachedName="DistanceFromPiraeusSeaMiles"
                       externalMetadataColumnId="Package\Load Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_DistanceFromPiraeusSeaMiles]"
                       lineageId="Package\Load Port\Convert distance to seamiles.Outputs[Derived Column Output].Columns[DistanceFromPiraeusSeaMiles]" />
+                    <inputColumn
+                      refId="Package\Load Port\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ISO3]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ISO3"
+                      externalMetadataColumnId="Package\Load Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_Country]"
+                      lineageId="Package\Load Port\Lookup ISO country.Outputs[Lookup Match Output].Columns[ISO3]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
