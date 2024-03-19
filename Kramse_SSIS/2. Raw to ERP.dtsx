@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="2  Raw to ERP"
   DTS:PackageType="5"
-  DTS:VersionBuild="81"
-  DTS:VersionGUID="{8F26BE0D-7299-49AE-BCF4-78D721B3F7BD}">
+  DTS:VersionBuild="96"
+  DTS:VersionGUID="{D6F0B6F5-B95B-40BB-8103-D81D02D289EA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -31,7 +31,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{D03D30E2-9B8E-4B69-8CE4-21027634FCB3}"
-          SQLTask:SqlStatementSource="DELETE FROM ShipmentDetail;&#xA;DELETE FROM Shipment;&#xA;DELETE FROM Container;&#xA;DELETE FROM Item;&#xA;DELETE FROM Consignor;&#xA;DELETE FROM VoyagePort;&#xA;DELETE FROM Voyage;&#xA;DELETE FROM Port;&#xA;DELETE FROM Ship;&#xA;DELETE FROM MRV;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="DELETE FROM ShipmentDetail;&#xA;DELETE FROM Shipment;&#xA;DELETE FROM VoyagePort;&#xA;DELETE FROM Voyage;&#xA;DELETE FROM Container;&#xA;DELETE FROM Item;&#xA;DELETE FROM Consignor;&#xA;DELETE FROM Port;&#xA;DELETE FROM Ship;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -65,7 +65,7 @@
                       refId="Package\Load Consignor\Change Discount from NULL to 0.Inputs[Derived Column Input].Columns[Discount]"
                       cachedDataType="r8"
                       cachedName="Discount"
-                      lineageId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Discount]" />
+                      lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Discount]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -91,7 +91,7 @@
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">[REPLACENULL](#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Discount]},0)</property>
+                          name="Expression">[REPLACENULL](#{Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Discount]},0)</property>
                         <property
                           containsID="true"
                           dataType="System.String"
@@ -129,6 +129,183 @@
               </outputs>
             </component>
             <component
+              refId="Package\Load Consignor\Convert Unicode to non-unicode"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Convert Unicode to non-unicode"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Consignor\Convert Unicode to non-unicode.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Consignor\Convert Unicode to non-unicode.Inputs[Data Conversion Input].Columns[Country]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Country"
+                      lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Country]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Consignor\Convert Unicode to non-unicode.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Load Consignor\Convert Unicode to non-unicode.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Consignor\Convert Unicode to non-unicode.Outputs[Data Conversion Output].Columns[Copy of Country]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Load Consignor\Convert Unicode to non-unicode.Outputs[Data Conversion Output].Columns[Copy of Country]"
+                      name="Copy of Country"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Country]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Consignor\Convert Unicode to non-unicode.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Load Consignor\Convert Unicode to non-unicode.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Consignor\Convert Unicode to non-unicode.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Consignor\Convert Unicode to non-unicode.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Consignor\Convert Unicode to non-unicode.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Consignor\Convert Unicode to non-unicode.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Consignor\Log Invalid Country Name"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Log Invalid Country Name"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">INSERT INTO Log
+VALUES ('Country Check', 'Country not found', ?, getdate())</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Consignor\Log Invalid Country Name.Connections[OleDbConnection]"
+                  connectionManagerID="{D03D30E2-9B8E-4B69-8CE4-21027634FCB3}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Kramse_ERP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Consignor\Log Invalid Country Name.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Consignor\Log Invalid Country Name.Inputs[OLE DB Command Input].Columns[Copy of Country]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of Country"
+                      externalMetadataColumnId="Package\Load Consignor\Log Invalid Country Name.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Load Consignor\Convert Unicode to non-unicode.Outputs[Data Conversion Output].Columns[Copy of Country]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Consignor\Log Invalid Country Name.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">193</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Consignor\Log Invalid Country Name.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Load Consignor\Log Invalid Country Name.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Consignor\Log Invalid Country Name.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Load Consignor\Log Invalid Country Name.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Consignor\Log Invalid Country Name.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Consignor\Log Invalid Country Name.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Consignor\Log Invalid Country Name.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Consignor\Log Invalid Country Name.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Load Consignor\Lookup Correct Country Codes"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
@@ -142,13 +319,13 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[CountryISO3]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Country]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[CountryISO3]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Country]) [refTable]
 where [refTable].[Country] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -180,7 +357,7 @@ where [refTable].[Country] = ?</property>
                 <property
                   dataType="System.String"
                   description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ISO3" dataType="DT_WSTR" length="3" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Country" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ISO3" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Country" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                 <property
                   containsID="true"
                   dataType="System.String"
@@ -241,7 +418,7 @@ where [refTable].[Country] = ?</property>
                       refId="Package\Load Consignor\Lookup Correct Country Codes.Outputs[Lookup Match Output].Columns[ISO3]"
                       dataType="wstr"
                       errorOrTruncationOperation="Copy Column"
-                      length="3"
+                      length="10"
                       lineageId="Package\Load Consignor\Lookup Correct Country Codes.Outputs[Lookup Match Output].Columns[ISO3]"
                       name="ISO3"
                       truncationRowDisposition="FailComponent">
@@ -282,400 +459,6 @@ where [refTable].[Country] = ?</property>
                       lineageId="Package\Load Consignor\Lookup Correct Country Codes.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Load Consignor\Lookup faulty Country codes"
-              componentClassID="Microsoft.Lookup"
-              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
-              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup faulty Country codes"
-              usesDispositions="true"
-              version="6">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the SQL statement that generates the lookup table."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Country]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
-                  expressionType="Notify"
-                  name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Country]) [refTable]
-where [refTable].[Country] = ?</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the type of connection used to access the reference dataset."
-                  name="ConnectionType"
-                  typeConverter="LookupConnectionType">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the cache type of the lookup table."
-                  name="CacheType"
-                  typeConverter="CacheType">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
-                  name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">1</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
-                  name="NoMatchCachePercentage">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
-                  name="MaxMemoryUsage">25</property>
-                <property
-                  dataType="System.Int64"
-                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
-                  name="MaxMemoryUsage64">25</property>
-                <property
-                  dataType="System.String"
-                  description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ISO3" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Country" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
-                <property
-                  containsID="true"
-                  dataType="System.String"
-                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Country]};</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
-                  name="TreatDuplicateKeysAsError">false</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Load Consignor\Lookup faulty Country codes.Connections[OleDbConnection]"
-                  connectionManagerID="{021F2B6F-7E39-4678-85FD-88E40F62BC7E}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-FJQ6KVQ.Kramse_Conversion]"
-                  description="Connection manager used to access lookup data."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Load Consignor\Lookup faulty Country codes.Inputs[Lookup Input]"
-                  name="Lookup Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Load Consignor\Lookup faulty Country codes.Inputs[Lookup Input].Columns[Country]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Country"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Country]">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table that a column joins."
-                          name="JoinToReferenceColumn">Country</property>
-                        <property
-                          dataType="System.Null"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn" />
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Load Consignor\Lookup faulty Country codes.Outputs[Lookup Match Output]"
-                  errorOrTruncationOperation="Lookup"
-                  exclusionGroup="1"
-                  name="Lookup Match Output"
-                  synchronousInputId="Package\Load Consignor\Lookup faulty Country codes.Inputs[Lookup Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Load Consignor\Lookup faulty Country codes.Outputs[Lookup Match Output].Columns[ISO3]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Copy Column"
-                      length="10"
-                      lineageId="Package\Load Consignor\Lookup faulty Country codes.Outputs[Lookup Match Output].Columns[ISO3]"
-                      name="ISO3"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">ISO3</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Load Consignor\Lookup faulty Country codes.Outputs[Lookup No Match Output]"
-                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
-                  exclusionGroup="1"
-                  name="Lookup No Match Output"
-                  synchronousInputId="Package\Load Consignor\Lookup faulty Country codes.Inputs[Lookup Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Load Consignor\Lookup faulty Country codes.Outputs[Lookup Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Lookup Error Output"
-                  synchronousInputId="Package\Load Consignor\Lookup faulty Country codes.Inputs[Lookup Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Load Consignor\Lookup faulty Country codes.Outputs[Lookup Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Load Consignor\Lookup faulty Country codes.Outputs[Lookup Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Load Consignor\Lookup faulty Country codes.Outputs[Lookup Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Load Consignor\Lookup faulty Country codes.Outputs[Lookup Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Load Consignor\Merge"
-              componentClassID="Microsoft.Merge"
-              contactInfo="Merge;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-              description="Combines rows from multiple sorted data flows into one sorted data flow. Unlike the Merge Join, all rows flow to the output. For example, combine two sorted lists of customers into a single sorted list. If sorting is not important, use the Union All transformation. "
-              name="Merge"
-              version="1">
-              <inputs>
-                <input
-                  refId="Package\Load Consignor\Merge.Inputs[Merge Input 1]"
-                  name="Merge Input 1">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Load Consignor\Merge.Inputs[Merge Input 1].Columns[Id]"
-                      cachedDataType="r8"
-                      cachedName="Id"
-                      cachedSortKeyPosition="1"
-                      lineageId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[Id]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Id]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Merge.Inputs[Merge Input 1].Columns[Consignor]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Consignor"
-                      lineageId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[Consignor]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Consignor]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Merge.Inputs[Merge Input 1].Columns[City]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="City"
-                      lineageId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[City]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[City]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Merge.Inputs[Merge Input 1].Columns[Country]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Country"
-                      lineageId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[Country]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Country]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Merge.Inputs[Merge Input 1].Columns[Discount]"
-                      cachedDataType="r8"
-                      cachedName="Discount"
-                      lineageId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[Discount]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Discount]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Merge.Inputs[Merge Input 1].Columns[ISO3]"
-                      cachedDataType="wstr"
-                      cachedLength="3"
-                      cachedName="ISO3"
-                      lineageId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[ISO3]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[ISO3]}</property>
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-                <input
-                  refId="Package\Load Consignor\Merge.Inputs[Merge Input 2]"
-                  name="Merge Input 2">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Load Consignor\Merge.Inputs[Merge Input 2].Columns[Id]"
-                      cachedDataType="r8"
-                      cachedName="Id"
-                      cachedSortKeyPosition="1"
-                      lineageId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[Id]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Id]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Merge.Inputs[Merge Input 2].Columns[Consignor]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Consignor"
-                      lineageId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[Consignor]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Consignor]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Merge.Inputs[Merge Input 2].Columns[City]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="City"
-                      lineageId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[City]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[City]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Merge.Inputs[Merge Input 2].Columns[Country]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Country"
-                      lineageId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[Country]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Country]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Merge.Inputs[Merge Input 2].Columns[Discount]"
-                      cachedDataType="r8"
-                      cachedName="Discount"
-                      lineageId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[Discount]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Discount]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Merge.Inputs[Merge Input 2].Columns[ISO3]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="ISO3"
-                      lineageId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[ISO3]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[ISO3]}</property>
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Load Consignor\Merge.Outputs[Merge Output 1]"
-                  isSorted="true"
-                  name="Merge Output 1">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Id]"
-                      dataType="r8"
-                      lineageId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Id]"
-                      name="Id"
-                      sortKeyPosition="1" />
-                    <outputColumn
-                      refId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Consignor]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Consignor]"
-                      name="Consignor" />
-                    <outputColumn
-                      refId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[City]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[City]"
-                      name="City" />
-                    <outputColumn
-                      refId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Country]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Country]"
-                      name="Country" />
-                    <outputColumn
-                      refId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Discount]"
-                      dataType="r8"
-                      lineageId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Discount]"
-                      name="Discount" />
-                    <outputColumn
-                      refId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[ISO3]"
-                      dataType="wstr"
-                      length="10"
-                      lineageId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[ISO3]"
-                      name="ISO3" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -757,23 +540,22 @@ where [refTable].[Country] = ?</property>
                       refId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Id]"
                       cachedDataType="r8"
                       cachedName="Id"
-                      cachedSortKeyPosition="1"
                       externalMetadataColumnId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
-                      lineageId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Id]" />
+                      lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]" />
                     <inputColumn
                       refId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Consignor]"
                       cachedDataType="wstr"
                       cachedLength="255"
                       cachedName="Consignor"
                       externalMetadataColumnId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Consignor]"
-                      lineageId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[Consignor]" />
+                      lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Consignor]" />
                     <inputColumn
                       refId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[City]"
                       cachedDataType="wstr"
                       cachedLength="255"
                       cachedName="City"
                       externalMetadataColumnId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
-                      lineageId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[City]" />
+                      lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]" />
                     <inputColumn
                       refId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Discount_New]"
                       cachedDataType="r8"
@@ -786,7 +568,7 @@ where [refTable].[Country] = ?</property>
                       cachedLength="10"
                       cachedName="ISO3"
                       externalMetadataColumnId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
-                      lineageId="Package\Load Consignor\Merge.Outputs[Merge Output 1].Columns[ISO3]" />
+                      lineageId="Package\Load Consignor\Lookup Correct Country Codes.Outputs[Lookup Match Output].Columns[ISO3]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1028,637 +810,13 @@ where [refTable].[Country] = ?</property>
                 </output>
               </outputs>
             </component>
-            <component
-              refId="Package\Load Consignor\OLE DB Source 1"
-              componentClassID="Microsoft.OLEDBSource"
-              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-              description="OLE DB Source"
-              name="OLE DB Source 1"
-              usesDispositions="true"
-              version="7">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Consignor]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">0</property>
-                <property
-                  dataType="System.String"
-                  description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Load Consignor\OLE DB Source 1.Connections[OleDbConnection]"
-                  connectionManagerID="{C22149BF-6AA1-4ADB-B91A-A3D7240D9045}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[Kramse_Raw]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output]"
-                  name="OLE DB Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Id]"
-                      dataType="r8"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Id]"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Id]"
-                      name="Id"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Consignor]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Consignor]"
-                      length="255"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Consignor]"
-                      name="Consignor"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[City]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[City]"
-                      length="255"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[City]"
-                      name="City"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Country]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Country]"
-                      length="255"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Country]"
-                      name="Country"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Discount]"
-                      dataType="r8"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Discount]"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Discount]"
-                      name="Discount"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Id]"
-                      dataType="r8"
-                      name="Id" />
-                    <externalMetadataColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Consignor]"
-                      dataType="wstr"
-                      length="255"
-                      name="Consignor" />
-                    <externalMetadataColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[City]"
-                      dataType="wstr"
-                      length="255"
-                      name="City" />
-                    <externalMetadataColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Country]"
-                      dataType="wstr"
-                      length="255"
-                      name="Country" />
-                    <externalMetadataColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Discount]"
-                      dataType="r8"
-                      name="Discount" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output]"
-                  isErrorOut="true"
-                  name="OLE DB Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Id]"
-                      dataType="r8"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Id]"
-                      name="Id" />
-                    <outputColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Consignor]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Consignor]"
-                      name="Consignor" />
-                    <outputColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[City]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[City]"
-                      name="City" />
-                    <outputColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Country]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Country]"
-                      name="Country" />
-                    <outputColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Discount]"
-                      dataType="r8"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Discount]"
-                      name="Discount" />
-                    <outputColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Load Consignor\Sort"
-              componentClassID="Microsoft.Sort"
-              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
-              name="Sort"
-              version="1">
-              <properties>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
-                  name="EliminateDuplicates">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the maximum number of threads to use for sorting."
-                  expressionType="Notify"
-                  name="MaximumThreads">-1</property>
-              </properties>
-              <inputs>
-                <input
-                  refId="Package\Load Consignor\Sort.Inputs[Sort Input]"
-                  name="Sort Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Load Consignor\Sort.Inputs[Sort Input].Columns[Id]"
-                      cachedDataType="r8"
-                      cachedName="Id"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Id]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">1</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Sort.Inputs[Sort Input].Columns[Consignor]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Consignor"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Consignor]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Sort.Inputs[Sort Input].Columns[City]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="City"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[City]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Sort.Inputs[Sort Input].Columns[Country]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Country"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Country]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Sort.Inputs[Sort Input].Columns[Discount]"
-                      cachedDataType="r8"
-                      cachedName="Discount"
-                      lineageId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Discount]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Sort.Inputs[Sort Input].Columns[ISO3]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="ISO3"
-                      lineageId="Package\Load Consignor\Lookup faulty Country codes.Outputs[Lookup Match Output].Columns[ISO3]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Load Consignor\Sort.Outputs[Sort Output]"
-                  isSorted="true"
-                  name="Sort Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[Id]"
-                      dataType="r8"
-                      lineageId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[Id]"
-                      name="Id"
-                      sortKeyPosition="1">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Id]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[Consignor]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[Consignor]"
-                      name="Consignor">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Consignor]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[City]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[City]"
-                      name="City">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[City]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[Country]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[Country]"
-                      name="Country">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Country]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[Discount]"
-                      dataType="r8"
-                      lineageId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[Discount]"
-                      name="Discount">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Discount]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[ISO3]"
-                      dataType="wstr"
-                      length="10"
-                      lineageId="Package\Load Consignor\Sort.Outputs[Sort Output].Columns[ISO3]"
-                      name="ISO3">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Load Consignor\Lookup faulty Country codes.Outputs[Lookup Match Output].Columns[ISO3]}</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Load Consignor\Sort 1"
-              componentClassID="Microsoft.Sort"
-              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
-              name="Sort 1"
-              version="1">
-              <properties>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
-                  name="EliminateDuplicates">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the maximum number of threads to use for sorting."
-                  expressionType="Notify"
-                  name="MaximumThreads">-1</property>
-              </properties>
-              <inputs>
-                <input
-                  refId="Package\Load Consignor\Sort 1.Inputs[Sort Input]"
-                  name="Sort Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Load Consignor\Sort 1.Inputs[Sort Input].Columns[Id]"
-                      cachedDataType="r8"
-                      cachedName="Id"
-                      lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">1</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Sort 1.Inputs[Sort Input].Columns[Consignor]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Consignor"
-                      lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Consignor]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Sort 1.Inputs[Sort Input].Columns[City]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="City"
-                      lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Sort 1.Inputs[Sort Input].Columns[Country]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Country"
-                      lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Country]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Sort 1.Inputs[Sort Input].Columns[Discount]"
-                      cachedDataType="r8"
-                      cachedName="Discount"
-                      lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Discount]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Consignor\Sort 1.Inputs[Sort Input].Columns[ISO3]"
-                      cachedDataType="wstr"
-                      cachedLength="3"
-                      cachedName="ISO3"
-                      lineageId="Package\Load Consignor\Lookup Correct Country Codes.Outputs[Lookup Match Output].Columns[ISO3]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Load Consignor\Sort 1.Outputs[Sort Output]"
-                  isSorted="true"
-                  name="Sort Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[Id]"
-                      dataType="r8"
-                      lineageId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[Id]"
-                      name="Id"
-                      sortKeyPosition="1">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[Consignor]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[Consignor]"
-                      name="Consignor">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Consignor]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[City]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[City]"
-                      name="City">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[Country]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[Country]"
-                      name="Country">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Country]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[Discount]"
-                      dataType="r8"
-                      lineageId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[Discount]"
-                      name="Discount">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Discount]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[ISO3]"
-                      dataType="wstr"
-                      length="3"
-                      lineageId="Package\Load Consignor\Sort 1.Outputs[Sort Output].Columns[ISO3]"
-                      name="ISO3">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Load Consignor\Lookup Correct Country Codes.Outputs[Lookup Match Output].Columns[ISO3]}</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
           </components>
           <paths>
+            <path
+              refId="Package\Load Consignor.Paths[Data Conversion Output]"
+              endId="Package\Load Consignor\Log Invalid Country Name.Inputs[OLE DB Command Input]"
+              name="Data Conversion Output"
+              startId="Package\Load Consignor\Convert Unicode to non-unicode.Outputs[Data Conversion Output]" />
             <path
               refId="Package\Load Consignor.Paths[Derived Column Output]"
               endId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input]"
@@ -1666,39 +824,19 @@ where [refTable].[Country] = ?</property>
               startId="Package\Load Consignor\Change Discount from NULL to 0.Outputs[Derived Column Output]" />
             <path
               refId="Package\Load Consignor.Paths[Lookup Match Output]"
-              endId="Package\Load Consignor\Sort.Inputs[Sort Input]"
-              name="Lookup Match Output"
-              startId="Package\Load Consignor\Lookup faulty Country codes.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Load Consignor.Paths[Lookup Match Output1]"
-              endId="Package\Load Consignor\Sort 1.Inputs[Sort Input]"
+              endId="Package\Load Consignor\Change Discount from NULL to 0.Inputs[Derived Column Input]"
               name="Lookup Match Output"
               startId="Package\Load Consignor\Lookup Correct Country Codes.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\Load Consignor.Paths[Merge Output 1]"
-              endId="Package\Load Consignor\Change Discount from NULL to 0.Inputs[Derived Column Input]"
-              name="Merge Output 1"
-              startId="Package\Load Consignor\Merge.Outputs[Merge Output 1]" />
+              refId="Package\Load Consignor.Paths[Lookup No Match Output]"
+              endId="Package\Load Consignor\Convert Unicode to non-unicode.Inputs[Data Conversion Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load Consignor\Lookup Correct Country Codes.Outputs[Lookup No Match Output]" />
             <path
               refId="Package\Load Consignor.Paths[OLE DB Source Output]"
-              endId="Package\Load Consignor\Lookup faulty Country codes.Inputs[Lookup Input]"
-              name="OLE DB Source Output"
-              startId="Package\Load Consignor\OLE DB Source 1.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Load Consignor.Paths[OLE DB Source Output1]"
               endId="Package\Load Consignor\Lookup Correct Country Codes.Inputs[Lookup Input]"
               name="OLE DB Source Output"
               startId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Load Consignor.Paths[Sort Output]"
-              endId="Package\Load Consignor\Merge.Inputs[Merge Input 1]"
-              name="Sort Output"
-              startId="Package\Load Consignor\Sort 1.Outputs[Sort Output]" />
-            <path
-              refId="Package\Load Consignor.Paths[Sort Output1]"
-              endId="Package\Load Consignor\Merge.Inputs[Merge Input 2]"
-              name="Sort Output"
-              startId="Package\Load Consignor\Sort.Outputs[Sort Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -2156,6 +1294,18 @@ where [refTable].[Country] = ?</property>
                       cachedScale="2"
                       externalMetadataColumnId="Package\Load Container\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Cubes]"
                       lineageId="Package\Load Container\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Cubes]" />
+                    <inputColumn
+                      refId="Package\Load Container\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EuroPricePerSeaMile]"
+                      cachedDataType="r8"
+                      cachedName="EuroPricePerSeaMile"
+                      externalMetadataColumnId="Package\Load Container\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EuroPricePerSeaMile]"
+                      lineageId="Package\Load Container\EuroPricePerKm to EuroPricePerSeaMile.Outputs[Derived Column Output].Columns[EuroPricePerSeaMile]" />
+                    <inputColumn
+                      refId="Package\Load Container\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TEU]"
+                      cachedDataType="i4"
+                      cachedName="TEU"
+                      externalMetadataColumnId="Package\Load Container\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TEU]"
+                      lineageId="Package\Load Container\Convert TEU.Outputs[Derived Column Output].Columns[TEU]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2199,6 +1349,10 @@ where [refTable].[Country] = ?</property>
                       name="EuroPricePerSeaMile"
                       precision="18"
                       scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Container\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TEU]"
+                      dataType="i4"
+                      name="TEU" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -3747,6 +2901,257 @@ where [refTable].[Country] = ?</property>
           version="1">
           <components>
             <component
+              refId="Package\Load Ship\Convert shipcost Dollar to Eur"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Convert shipcost Dollar to Eur"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Ship\Convert shipcost Dollar to Eur.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Ship\Convert shipcost Dollar to Eur.Inputs[Derived Column Input].Columns[Sh_Yearcost]"
+                      cachedDataType="cy"
+                      cachedName="Sh_Yearcost"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Yearcost]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Load Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Yearcost]} * (DT_R8)"0.92"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">Sh_Yearcost * (DT_R8)"0.92"</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Ship\Convert shipcost Dollar to Eur.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load Ship\Convert shipcost Dollar to Eur.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Ship\Convert shipcost Dollar to Eur.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load Ship\Convert shipcost Dollar to Eur.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ship\Convert shipcost Dollar to Eur.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Ship\Convert shipcost Dollar to Eur.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Ship\Convert shipcost Dollar to Eur.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Ship\Convert shipcost Dollar to Eur.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Ship\Convert unicode to non-unicode"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Convert unicode to non-unicode"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Ship\Convert unicode to non-unicode.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Ship\Convert unicode to non-unicode.Inputs[Data Conversion Input].Columns[Sh_Country]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Sh_Country"
+                      lineageId="Package\Load Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Country]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Ship\Convert unicode to non-unicode.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Load Ship\Convert unicode to non-unicode.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ship\Convert unicode to non-unicode.Outputs[Data Conversion Output].Columns[Copy of Sh_Country]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load Ship\Convert unicode to non-unicode.Outputs[Data Conversion Output].Columns[Copy of Sh_Country]"
+                      name="Copy of Sh_Country"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Country]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Ship\Convert unicode to non-unicode.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Load Ship\Convert unicode to non-unicode.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ship\Convert unicode to non-unicode.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Ship\Convert unicode to non-unicode.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Ship\Convert unicode to non-unicode.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Ship\Convert unicode to non-unicode.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Ship\Log Invalid country"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Log Invalid country"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">INSERT INTO Log
+VALUES ('Country Check', 'Country not found', ?, getdate())</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Ship\Log Invalid country.Connections[OleDbConnection]"
+                  connectionManagerID="{D03D30E2-9B8E-4B69-8CE4-21027634FCB3}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Kramse_ERP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Ship\Log Invalid country.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Ship\Log Invalid country.Inputs[OLE DB Command Input].Columns[Copy of Sh_Country]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Copy of Sh_Country"
+                      externalMetadataColumnId="Package\Load Ship\Log Invalid country.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Load Ship\Convert unicode to non-unicode.Outputs[Data Conversion Output].Columns[Copy of Sh_Country]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Ship\Log Invalid country.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">193</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Ship\Log Invalid country.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Load Ship\Log Invalid country.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Ship\Log Invalid country.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Load Ship\Log Invalid country.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ship\Log Invalid country.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Ship\Log Invalid country.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Ship\Log Invalid country.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Ship\Log Invalid country.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Load Ship\Lookup Country ISO"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
@@ -4618,13 +4023,118 @@ where [refTable].[Name] = ?</property>
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Load Ship\ReportYear to DateFormat"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="ReportYear to DateFormat"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Ship\ReportYear to DateFormat.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Ship\ReportYear to DateFormat.Inputs[Derived Column Input].Columns[Reporting Period]"
+                      cachedDataType="r8"
+                      cachedName="Reporting Period"
+                      lineageId="Package\Load Ship\lookup Ship MRV data.Outputs[Lookup Match Output].Columns[Reporting Period]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Ship\ReportYear to DateFormat.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load Ship\ReportYear to DateFormat.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ship\ReportYear to DateFormat.Outputs[Derived Column Output].Columns[ReportingDate]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load Ship\ReportYear to DateFormat.Outputs[Derived Column Output].Columns[ReportingDate]"
+                      name="ReportingDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DATE)((DT_WSTR,5)#{Package\Load Ship\lookup Ship MRV data.Outputs[Lookup Match Output].Columns[Reporting Period]} + "-12-31")</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DATE)((DT_WSTR,5)[Reporting Period] + "-12-31")</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Ship\ReportYear to DateFormat.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load Ship\ReportYear to DateFormat.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Ship\ReportYear to DateFormat.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Ship\ReportYear to DateFormat.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Ship\ReportYear to DateFormat.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Ship\ReportYear to DateFormat.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
+            <path
+              refId="Package\Load Ship.Paths[Data Conversion Output]"
+              endId="Package\Load Ship\Log Invalid country.Inputs[OLE DB Command Input]"
+              name="Data Conversion Output"
+              startId="Package\Load Ship\Convert unicode to non-unicode.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Load Ship.Paths[Derived Column Output]"
+              endId="Package\Load Ship\ReportYear to DateFormat.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\Load Ship\Convert shipcost Dollar to Eur.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load Ship.Paths[Derived Column Output1]"
+              endId="Package\Load Ship\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Load Ship\ReportYear to DateFormat.Outputs[Derived Column Output]" />
             <path
               refId="Package\Load Ship.Paths[Lookup Match Output]"
               endId="Package\Load Ship\lookup Ship MRV data.Inputs[Lookup Input]"
               name="Lookup Match Output"
               startId="Package\Load Ship\Lookup Country ISO.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Ship.Paths[Lookup Match Output1]"
+              endId="Package\Load Ship\Convert shipcost Dollar to Eur.Inputs[Derived Column Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Ship\lookup Ship MRV data.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Ship.Paths[Lookup No Match Output]"
+              endId="Package\Load Ship\Convert unicode to non-unicode.Inputs[Data Conversion Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load Ship\Lookup Country ISO.Outputs[Lookup No Match Output]" />
             <path
               refId="Package\Load Ship.Paths[OLE DB Source Output]"
               endId="Package\Load Ship\Lookup Country ISO.Inputs[Lookup Input]"
@@ -6407,6 +5917,104 @@ where [refTable].[Name] = ?</property>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{D0CC5CEA-DE9B-4620-8E50-5528789E38D9}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load Consignor" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{0EEEF02D-F150-40C0-BC56-4DBAC60FA339}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Port" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{25009FFE-95D0-4F55-A5C6-E5F9C5902625}"
+      DTS:From="Package\Load Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\Load ShipmentDetails" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 11]"
+      DTS:CreationName=""
+      DTS:DTSID="{95932E53-862D-45BB-87C2-472EFA90AFAC}"
+      DTS:From="Package\Load Item"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 11"
+      DTS:To="Package\Load ShipmentDetails" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{7729C412-DDEC-4AAE-A04F-21B1089ED9C1}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load Ship" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{8D16146D-7C89-49CE-8CE6-C7DC7B0CC2F8}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Load Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{C79FBC08-3E1B-40DC-9CA4-6A66F95AB964}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Load Item" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{1F44A401-130D-4D32-BC99-3EBF98B4BB42}"
+      DTS:From="Package\Load Ship"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Load Voyage" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{75705AE9-24E2-477C-AE62-AF51083265A1}"
+      DTS:From="Package\Load Voyage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Load VoyagePort" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{B1E2CA4B-4E74-4E3F-B90D-5DA5F306FCC7}"
+      DTS:From="Package\Load Port"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Load Shipment" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{2A83CB03-C3A9-4483-AD83-3CAAFD17D36C}"
+      DTS:From="Package\Load Consignor"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Load Shipment" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{C5E5D7E6-9557-4254-8821-FDAEA576486C}"
+      DTS:From="Package\Load Shipment"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\Load ShipmentDetails" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -6418,7 +6026,7 @@ where [refTable].[Name] = ?</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="162.4,41.6"
           Id="Package\Execute SQL Task"
@@ -6454,11 +6062,383 @@ where [refTable].[Name] = ?</property>
         <NodeLayout
           Size="139.2,41.6"
           Id="Package\Load Voyage"
-          TopLeft="188.571428972848,243.941176256764" />
+          TopLeft="176.428571804142,244.705882138447" />
         <NodeLayout
           Size="157.6,41.6"
           Id="Package\Load VoyagePort"
           TopLeft="168.571428930273,336.470587940365" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="427.628572166027,70.6588235039406">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="112.25714310803,64.6941175538874"
+              Start="0,0"
+              End="112.25714310803,57.1941175538874">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.3470587769437" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.3470587769437"
+                    Point2="0,32.3470587769437"
+                    Point3="4,32.3470587769437" />
+                  <mssgle:LineSegment
+                    End="108.25714310803,32.3470587769437" />
+                  <mssgle:CubicBezierSegment
+                    Point1="108.25714310803,32.3470587769437"
+                    Point2="112.25714310803,32.3470587769437"
+                    Point3="112.25714310803,36.3470587769437" />
+                  <mssgle:LineSegment
+                    End="112.25714310803,57.1941175538874" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="401.895238832694,70.6588235039406">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-13.8666667092416,69.2823528439834"
+              Start="0,0"
+              End="-13.8666667092416,61.7823528439834">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.1184963737533" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.1184963737533"
+                    Point2="0,28.1184963737533"
+                    Point3="-4,28.1184963737533" />
+                  <mssgle:LineSegment
+                    End="-9.8666667092416,28.1184963737533" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-9.8666667092416,28.1184963737533"
+                    Point2="-13.8666667092416,28.1184963737533"
+                    Point3="-13.8666667092416,32.1184963737533" />
+                  <mssgle:LineSegment
+                    End="-13.8666667092416,61.7823528439834" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="389.028572166027,70.6588235039406">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-150.914286077692,72.3411763707144"
+              Start="0,0"
+              End="-150.914286077692,64.8411763707144">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.8928442115706" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.8928442115706"
+                    Point2="0,24.8928442115706"
+                    Point3="-4,24.8928442115706" />
+                  <mssgle:LineSegment
+                    End="-146.914286077692,24.8928442115706" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-146.914286077692,24.8928442115706"
+                    Point2="-150.914286077692,24.8928442115706"
+                    Point3="-150.914286077692,28.8928442115706" />
+                  <mssgle:LineSegment
+                    End="-150.914286077692,64.8411763707144" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="473.948572166027,70.6588235039406">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="227.565714550286,66.9882351989354"
+              Start="0,0"
+              End="227.565714550286,59.4882351989354">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.1287874202176" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.1287874202176"
+                    Point2="0,20.1287874202176"
+                    Point3="4,20.1287874202176" />
+                  <mssgle:LineSegment
+                    End="223.565714550286,20.1287874202176" />
+                  <mssgle:CubicBezierSegment
+                    Point1="223.565714550286,20.1287874202176"
+                    Point2="227.565714550286,20.1287874202176"
+                    Point3="227.565714550286,24.1287874202176" />
+                  <mssgle:LineSegment
+                    End="227.565714550286,59.4882351989354" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="479.095238832694,70.6588235039406">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="373.304762423261,68.5176469623014"
+              Start="0,0"
+              End="373.304762423261,61.0176469623014">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.3647058564822" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.3647058564822"
+                    Point2="0,18.3647058564822"
+                    Point3="4,18.3647058564822" />
+                  <mssgle:LineSegment
+                    End="369.304762423261,18.3647058564822" />
+                  <mssgle:CubicBezierSegment
+                    Point1="369.304762423261,18.3647058564822"
+                    Point2="373.304762423261,18.3647058564822"
+                    Point3="373.304762423261,22.3647058564822" />
+                  <mssgle:LineSegment
+                    End="373.304762423261,61.0176469623014" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="242.071428946238,184.599999874655">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.1058822637917"
+              Start="0,0"
+              End="0,52.6058822637917">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.6058822637917" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="246.700000367207,286.305882138447">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.1647058019183"
+              Start="0,0"
+              End="0,42.6647058019183">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.6647058019183" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="388.028572123452,181.541176347924">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="44.942857211281,135.811764550374"
+              Start="0,0"
+              End="44.942857211281,128.311764550374">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.905882275187" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,63.905882275187"
+                    Point2="0,67.905882275187"
+                    Point3="4,67.905882275187" />
+                  <mssgle:LineSegment
+                    End="40.942857211281,67.905882275187" />
+                  <mssgle:CubicBezierSegment
+                    Point1="40.942857211281,67.905882275187"
+                    Point2="44.942857211281,67.905882275187"
+                    Point3="44.942857211281,71.905882275187" />
+                  <mssgle:LineSegment
+                    End="44.942857211281,128.311764550374" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="539.885715274057,176.952941057828">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-83.4476192726573,140.39999984047"
+              Start="0,0"
+              End="-83.4476192726573,132.89999984047">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,79.3438296925344" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,79.3438296925344"
+                    Point2="0,83.3438296925344"
+                    Point3="-4,83.3438296925344" />
+                  <mssgle:LineSegment
+                    End="-79.4476192726573,83.3438296925344" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-79.4476192726573,83.3438296925344"
+                    Point2="-83.4476192726573,83.3438296925344"
+                    Point3="-83.4476192726573,87.3438296925344" />
+                  <mssgle:LineSegment
+                    End="-83.4476192726573,132.89999984047" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="507.371429334733,338.152940898298">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="65.485714741872,0"
+              Start="0,0"
+              End="57.985714741872,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="57.985714741872,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="701.514286716313,179.247058702876">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-38.657142639708,138.105882195422"
+              Start="0,0"
+              End="-38.657142639708,130.605882195422">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.052941097711" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,65.052941097711"
+                    Point2="0,69.052941097711"
+                    Point3="-4,69.052941097711" />
+                  <mssgle:LineSegment
+                    End="-34.657142639708,69.052941097711" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-34.657142639708,69.052941097711"
+                    Point2="-38.657142639708,69.052941097711"
+                    Point3="-38.657142639708,73.052941097711" />
+                  <mssgle:LineSegment
+                    End="-38.657142639708,130.605882195422" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="852.400001255955,180.776470466242">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-160.876190512683,136.576470432056"
+              Start="0,0"
+              End="-160.876190512683,129.076470432056">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,77.2238921071699" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,77.2238921071699"
+                    Point2="0,81.2238921071699"
+                    Point3="-4,81.2238921071699" />
+                  <mssgle:LineSegment
+                    End="-156.876190512683,81.2238921071699" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-156.876190512683,81.2238921071699"
+                    Point2="-160.876190512683,81.2238921071699"
+                    Point3="-160.876190512683,85.2238921071699" />
+                  <mssgle:LineSegment
+                    End="-160.876190512683,129.076470432056" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -6466,15 +6446,7 @@ where [refTable].[Name] = ?</property>
     design-time-name="Package\Load Consignor">
     <LayoutInfo>
       <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="106.4,41.6"
-          Id="Package\Load Consignor\Sort 1"
-          TopLeft="279.28571488024,231.435293924602" />
-        <NodeLayout
-          Size="97.6,41.6"
-          Id="Package\Load Consignor\Sort"
-          TopLeft="569.285715497574,223.788235107776" />
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="221.6,41.6"
           Id="Package\Load Consignor\Lookup Correct Country Codes"
@@ -6482,185 +6454,29 @@ where [refTable].[Name] = ?</property>
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\Load Consignor\OLE DB Destination"
-          TopLeft="369.999996615308,435.588229414656" />
+          TopLeft="232.999998656767,376.588230293824" />
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Load Consignor\OLE DB Source"
-          TopLeft="249.85713901234,49.0588215650366" />
-        <NodeLayout
-          Size="212.8,41.6"
-          Id="Package\Load Consignor\Lookup faulty Country codes"
-          TopLeft="489.285715327275,145.023529294463" />
+          TopLeft="237.857139191154,46.0588216097401" />
         <NodeLayout
           Size="232.8,41.6"
           Id="Package\Load Consignor\Change Discount from NULL to 0"
-          TopLeft="207.14285758381,343.129411489885" />
-        <NodeLayout
-          Size="107.2,41.6"
-          Id="Package\Load Consignor\Merge"
-          TopLeft="405.714286577945,291.847058577531" />
-        <NodeLayout
-          Size="158.4,41.6"
-          Id="Package\Load Consignor\OLE DB Source 1"
-          TopLeft="512.857143948881,45.6117646757191" />
-        <EdgeLayout
-          Id="Package\Load Consignor.Paths[Lookup Match Output]"
-          TopLeft="595.685715327275,186.623529294463">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="22.4000001702991,37.1647058133126"
-              Start="0,0"
-              End="22.4000001702991,29.6647058133126">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,14.5823529066563" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,14.5823529066563"
-                    Point2="0,18.5823529066563"
-                    Point3="4,18.5823529066563" />
-                  <mssgle:LineSegment
-                    End="18.4000001702991,18.5823529066563" />
-                  <mssgle:CubicBezierSegment
-                    Point1="18.4000001702991,18.5823529066563"
-                    Point2="22.4000001702991,18.5823529066563"
-                    Point3="22.4000001702991,22.5823529066563" />
-                  <mssgle:LineSegment
-                    End="22.4000001702991,29.6647058133126" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-36.9913866336004,23.5823529066563,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="203.142857643415,265.129412652176" />
         <EdgeLayout
           Id="Package\Load Consignor.Paths[Derived Column Output]"
-          TopLeft="323.54285758381,384.729411489885">
+          TopLeft="318.871428150091,306.729412652176">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="131.657139031498,50.8588179247704"
+              EndConnector="0,69.8588176416489"
               Start="0,0"
-              End="131.657139031498,43.3588179247704">
+              End="0,62.3588176416489">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21.4294089623852" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,21.4294089623852"
-                    Point2="0,25.4294089623852"
-                    Point3="4,25.4294089623852" />
-                  <mssgle:LineSegment
-                    End="127.657139031498,25.4294089623852" />
-                  <mssgle:CubicBezierSegment
-                    Point1="127.657139031498,25.4294089623852"
-                    Point2="131.657139031498,25.4294089623852"
-                    Point3="131.657139031498,29.4294089623852" />
-                  <mssgle:LineSegment
-                    End="131.657139031498,43.3588179247704" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Consignor.Paths[Sort Output1]"
-          TopLeft="618.085715497574,265.388235107776">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-142.238095586296,26.4588234697555"
-              Start="0,0"
-              End="-142.238095586296,18.9588234697555">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,11.6418338747672" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,11.6418338747672"
-                    Point2="0,15.6418338747672"
-                    Point3="-4,15.6418338747672" />
-                  <mssgle:LineSegment
-                    End="-138.238095586296,15.6418338747672" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-138.238095586296,15.6418338747672"
-                    Point2="-142.238095586296,15.6418338747672"
-                    Point3="-142.238095586296,19.6418338747672" />
-                  <mssgle:LineSegment
-                    End="-142.238095586296,18.9588234697555" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Consignor.Paths[Sort Output]"
-          TopLeft="385.68571488024,252.235293924602">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="73.6285716977049,39.611764652929"
-              Start="0,0"
-              End="73.6285716977049,32.111764652929">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="69.6285716977049,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="69.6285716977049,0"
-                    Point2="73.6285716977049,0"
-                    Point3="73.6285716977049,4" />
-                  <mssgle:LineSegment
-                    End="73.6285716977049,32.111764652929" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Consignor.Paths[OLE DB Source Output1]"
-          TopLeft="324.65713901234,90.6588215650366">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-8.14285286014245,50.5411783210133"
-              Start="0,0"
-              End="-8.14285286014245,43.0411783210133">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,21.2705891605066" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,21.2705891605066"
-                    Point2="0,25.2705891605066"
-                    Point3="-4,25.2705891605066" />
-                  <mssgle:LineSegment
-                    End="-4.14285286014245,25.2705891605066" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-4.14285286014245,25.2705891605066"
-                    Point2="-8.14285286014245,25.2705891605066"
-                    Point3="-8.14285286014245,29.2705891605066" />
-                  <mssgle:LineSegment
-                    End="-8.14285286014245,43.0411783210133" />
+                    End="0,62.3588176416489" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6671,18 +6487,18 @@ where [refTable].[Name] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Consignor.Paths[OLE DB Source Output]"
-          TopLeft="593.871429638078,87.2117646757191">
+          TopLeft="314.585712671676,87.6588216097401">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,57.8117646187441"
+              EndConnector="0,53.5411782763099"
               Start="0,0"
-              End="0,50.3117646187441">
+              End="0,46.0411782763099">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,50.3117646187441" />
+                    End="0,46.0411782763099" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6692,67 +6508,81 @@ where [refTable].[Name] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Load Consignor.Paths[Merge Output 1]"
-          TopLeft="405.714286577945,312.647058577531">
+          Id="Package\Load Consignor.Paths[Lookup Match Output]"
+          TopLeft="318.028571897806,182.79999988605">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-82.1714289941353,30.4823529123537"
+              EndConnector="0,82.3294127661255"
               Start="0,0"
-              End="-82.1714289941353,22.9823529123537">
+              End="0,74.8294127661255">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-78.1714289941353,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-78.1714289941353,0"
-                    Point2="-82.1714289941353,0"
-                    Point3="-82.1714289941353,4" />
-                  <mssgle:LineSegment
-                    End="-82.1714289941353,22.9823529123537" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Consignor.Paths[Lookup Match Output1]"
-          TopLeft="316.514286152198,182.79999988605">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="15.9714287280427,48.6352940385524"
-              Start="0,0"
-              End="15.9714287280427,41.1352940385524">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.3176470192762" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.3176470192762"
-                    Point2="0,24.3176470192762"
-                    Point3="4,24.3176470192762" />
-                  <mssgle:LineSegment
-                    End="11.9714287280427,24.3176470192762" />
-                  <mssgle:CubicBezierSegment
-                    Point1="11.9714287280427,24.3176470192762"
-                    Point2="15.9714287280427,24.3176470192762"
-                    Point3="15.9714287280427,28.3176470192762" />
-                  <mssgle:LineSegment
-                    End="15.9714287280427,41.1352940385524" />
+                    End="0,74.8294127661255" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-40.2056723547286,29.3176470192762,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,31.6100188830628,96.3827734375,11.609375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="200.8,41.6"
+          Id="Package\Load Consignor\Log Invalid Country Name"
+          TopLeft="854.999987259507,147.999997794628" />
+        <NodeLayout
+          Size="229.6,41.6"
+          Id="Package\Load Consignor\Convert Unicode to non-unicode"
+          TopLeft="560.999991640449,148.999997779727" />
+        <EdgeLayout
+          Id="Package\Load Consignor.Paths[Lookup No Match Output]"
+          TopLeft="427.314286152198,165.899998832889">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="133.685705488251,0"
+              Start="0,0"
+              End="126.185705488251,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="126.185705488251,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="7.28646602537543,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Consignor.Paths[Data Conversion Output]"
+          TopLeft="790.599991640449,169.299997787178">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="64.3999956190586,0"
+              Start="0,0"
+              End="56.8999956190586,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="56.8999956190586,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -6764,17 +6594,17 @@ where [refTable].[Name] = ?</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:string">false</Value>
+          type="q2:boolean">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[dbo].[CountryISO3]</Value>
+          type="q3:string">[dbo].[Country]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:string">0</Value>
+          type="q4:int">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -6807,47 +6637,15 @@ where [refTable].[Name] = ?</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Consignor\Lookup faulty Country codes">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[Country]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Consignor\OLE DB Source 1">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Load Container">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="264.8,41.6"
+          Id="Package\Load Container\EuroPricePerKm to EuroPricePerSeaMile"
+          TopLeft="173.999997407198,344.999994859099" />
         <NodeLayout
           Size="155.2,41.6"
           Id="Package\Load Container\Data Conversion"
@@ -6864,6 +6662,10 @@ where [refTable].[Name] = ?</property>
           Size="149.6,41.6"
           Id="Package\Load Container\OLE DB Source"
           TopLeft="229.999996572733,14.9999997764821" />
+        <NodeLayout
+          Size="137.6,41.6"
+          Id="Package\Load Container\Convert TEU"
+          TopLeft="241.999996393919,255.999996185303" />
         <EdgeLayout
           Id="Package\Load Container.Paths[OLE DB Source Output]"
           TopLeft="304.799996572733,56.5999997764821">
@@ -6890,6 +6692,84 @@ where [refTable].[Name] = ?</property>
                     Point3="15.5714326108599,21.3470599383583" />
                   <mssgle:LineSegment
                     End="15.5714326108599,27.1941198767165" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Container.Paths[Derived Column Output1]"
+          TopLeft="306.399997407198,386.599994859099">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="18.371426718515,88.3411752206946"
+              Start="0,0"
+              End="18.371426718515,80.8411752206946">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.1705876103473" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,40.1705876103473"
+                    Point2="0,44.1705876103473"
+                    Point3="4,44.1705876103473" />
+                  <mssgle:LineSegment
+                    End="14.371426718515,44.1705876103473" />
+                  <mssgle:CubicBezierSegment
+                    Point1="14.371426718515,44.1705876103473"
+                    Point2="18.371426718515,44.1705876103473"
+                    Point3="18.371426718515,48.1705876103473" />
+                  <mssgle:LineSegment
+                    End="18.371426718515,80.8411752206946" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Container.Paths[Derived Column Output]"
+          TopLeft="308.599996900558,297.599996185303">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.3999986737967"
+              Start="0,0"
+              End="0,39.8999986737967">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.8999986737967" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Container.Paths[Data Conversion Output]"
+          TopLeft="311.057141277316,219.952943022153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.0470531631499"
+              Start="0,0"
+              End="0,28.5470531631499">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5470531631499" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6934,92 +6814,6 @@ where [refTable].[Name] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="137.6,41.6"
-          Id="Package\Load Container\Convert TEU"
-          TopLeft="241.999996393919,255.999996185303" />
-        <EdgeLayout
-          Id="Package\Load Container.Paths[Data Conversion Output]"
-          TopLeft="311.057141277316,219.952943022153">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,36.0470531631499"
-              Start="0,0"
-              End="0,28.5470531631499">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,28.5470531631499" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="264.8,41.6"
-          Id="Package\Load Container\EuroPricePerKm to EuroPricePerSeaMile"
-          TopLeft="173.999997407198,344.999994859099" />
-        <EdgeLayout
-          Id="Package\Load Container.Paths[Derived Column Output]"
-          TopLeft="308.599996900558,297.599996185303">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,47.3999986737967"
-              Start="0,0"
-              End="0,39.8999986737967">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,39.8999986737967" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Container.Paths[Derived Column Output1]"
-          TopLeft="306.399997407198,386.599994859099">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="18.371426718515,88.3411752206946"
-              Start="0,0"
-              End="18.371426718515,80.8411752206946">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,40.1705876103473" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,40.1705876103473"
-                    Point2="0,44.1705876103473"
-                    Point3="4,44.1705876103473" />
-                  <mssgle:LineSegment
-                    End="14.371426718515,44.1705876103473" />
-                  <mssgle:CubicBezierSegment
-                    Point1="14.371426718515,44.1705876103473"
-                    Point2="18.371426718515,44.1705876103473"
-                    Point3="18.371426718515,48.1705876103473" />
-                  <mssgle:LineSegment
-                    End="18.371426718515,80.8411752206946" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -7053,7 +6847,7 @@ where [refTable].[Name] = ?</property>
     design-time-name="Package\Load Item">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Load Item\OLE DB Source"
@@ -7093,9 +6887,7 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -7133,51 +6925,17 @@ where [refTable].[Name] = ?</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\Load Port\OLE DB Source"
-          TopLeft="473.999992936849,51.9999992251395" />
-        <NodeLayout
           Size="170.4,41.6"
           Id="Package\Load Port\OLE DB Destination"
           TopLeft="465.999993056059,336.999994978308" />
         <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Load Port\OLE DB Source"
+          TopLeft="473.999992936849,51.9999992251395" />
+        <NodeLayout
           Size="172,41.6"
           Id="Package\Load Port\Lookup ISO country"
           TopLeft="496.999992594123,133.999998003244" />
-        <EdgeLayout
-          Id="Package\Load Port.Paths[OLE DB Source Output]"
-          TopLeft="548.799992936849,93.5999992251395">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="34.1999996572738,40.3999987781049"
-              Start="0,0"
-              End="34.1999996572738,32.8999987781049">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.1999993890524" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,16.1999993890524"
-                    Point2="0,20.1999993890524"
-                    Point3="4,20.1999993890524" />
-                  <mssgle:LineSegment
-                    End="30.1999996572738,20.1999993890524" />
-                  <mssgle:CubicBezierSegment
-                    Point1="30.1999996572738,20.1999993890524"
-                    Point2="34.1999996572738,20.1999993890524"
-                    Point3="34.1999996572738,24.1999993890524" />
-                  <mssgle:LineSegment
-                    End="34.1999996572738,32.8999987781049" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="212.8,41.6"
           Id="Package\Load Port\Convert distance to seamiles"
@@ -7252,6 +7010,40 @@ where [refTable].[Name] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Port.Paths[OLE DB Source Output]"
+          TopLeft="548.799992936849,93.5999992251395">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="34.1999996572738,40.3999987781049"
+              Start="0,0"
+              End="34.1999996572738,32.8999987781049">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.1999993890524" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.1999993890524"
+                    Point2="0,20.1999993890524"
+                    Point3="4,20.1999993890524" />
+                  <mssgle:LineSegment
+                    End="30.1999996572738,20.1999993890524" />
+                  <mssgle:CubicBezierSegment
+                    Point1="30.1999996572738,20.1999993890524"
+                    Point2="34.1999996572738,20.1999993890524"
+                    Point3="34.1999996572738,24.1999993890524" />
+                  <mssgle:LineSegment
+                    End="34.1999996572738,32.8999987781049" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -7308,7 +7100,7 @@ where [refTable].[Name] = ?</property>
     design-time-name="Package\Load Ship">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Load Ship\OLE DB Source"
@@ -7320,21 +7112,21 @@ where [refTable].[Name] = ?</property>
         <NodeLayout
           Size="173.6,41.6"
           Id="Package\Load Ship\Lookup Country ISO"
-          TopLeft="248.999996289611,135.999997973442" />
+          TopLeft="248.999996289611,99.9999985098839" />
         <EdgeLayout
           Id="Package\Load Ship.Paths[OLE DB Source Output]"
           TopLeft="333.871427117653,63.1882359483766">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,72.8117620250655"
+              EndConnector="0,36.8117625615073"
               Start="0,0"
-              End="0,65.3117620250655">
+              End="0,29.3117625615073">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,65.3117620250655" />
+                    End="0,29.3117625615073" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -7346,29 +7138,159 @@ where [refTable].[Name] = ?</property>
         <NodeLayout
           Size="181.6,41.6"
           Id="Package\Load Ship\lookup Ship MRV data"
-          TopLeft="247.999996304512,243.999996364117" />
+          TopLeft="248.999996289611,178.999997332692" />
         <EdgeLayout
           Id="Package\Load Ship.Paths[Lookup Match Output]"
-          TopLeft="337.299996297062,177.599997973442">
+          TopLeft="337.799996289611,141.599998509884">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,66.3999983906746"
+              EndConnector="0,37.3999988228083"
               Start="0,0"
-              End="0,58.8999983906746">
+              End="0,29.8999988228083">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,58.8999983906746" />
+                    End="0,29.8999988228083" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,23.6453116953373,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,9.14531191140414,96.3827734375,11.609375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="218.4,41.6"
+          Id="Package\Load Ship\Convert shipcost Dollar to Eur"
+          TopLeft="222.999996677041,252.999996230006" />
+        <EdgeLayout
+          Id="Package\Load Ship.Paths[Lookup Match Output1]"
+          TopLeft="335.999996483326,220.599997332692">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.3999988973138"
+              Start="0,0"
+              End="0,24.8999988973138">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.8999988973138" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,6.64531194865691,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="202.4,41.6"
+          Id="Package\Load Ship\ReportYear to DateFormat"
+          TopLeft="232.999996528029,344.999994859099" />
+        <EdgeLayout
+          Id="Package\Load Ship.Paths[Derived Column Output]"
+          TopLeft="333.199996602535,294.599996230006">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.3999986290934"
+              Start="0,0"
+              End="0,42.8999986290934">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.8999986290934" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Ship.Paths[Derived Column Output1]"
+          TopLeft="335.985712912223,386.599994859099">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,101.576472776798"
+              Start="0,0"
+              End="0,94.0764727767985">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,94.0764727767985" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Load Ship\Log Invalid country"
+          TopLeft="853.999987274408,97.9999985396862" />
+        <NodeLayout
+          Size="228.8,41.6"
+          Id="Package\Load Ship\Convert unicode to non-unicode"
+          TopLeft="555.999991714954,98.999998524785" />
+        <EdgeLayout
+          Id="Package\Load Ship.Paths[Lookup No Match Output]"
+          TopLeft="422.599996289611,120.299998517334">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="133.399995425343,0"
+              Start="0,0"
+              End="125.899995425343,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="125.899995425343,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="7.14361099392169,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Ship.Paths[Data Conversion Output]"
+          TopLeft="784.799991714954,119.299998532236">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="69.1999955594538,0"
+              Start="0,0"
+              End="61.6999955594538,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="61.6999955594538,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -7632,7 +7554,7 @@ where [refTable].[Name] = ?</property>
     design-time-name="Package\Load Voyage">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\Load Voyage\OLE DB Destination"
@@ -7672,9 +7594,7 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
