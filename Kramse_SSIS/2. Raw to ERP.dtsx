@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="2  Raw to ERP"
   DTS:PackageType="5"
-  DTS:VersionBuild="109"
-  DTS:VersionGUID="{3B558F49-C62A-48F4-A593-19D86467A8FF}">
+  DTS:VersionBuild="114"
+  DTS:VersionGUID="{DCE757C3-3AB9-485E-9D40-485A60D486BA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -1139,13 +1139,13 @@ where [refTable].[Country] = ?</property>
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">#{Package\Load Container\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EuroPricePerKm]} / (DT_R8)"1.852"</property>
+                          name="Expression">#{Package\Load Container\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EuroPricePerKm]} / (DT_R8)"1,852"</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">[Copy of EuroPricePerKm] / (DT_R8)"1.852"</property>
+                          name="FriendlyExpression">[Copy of EuroPricePerKm] / (DT_R8)"1,852"</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -2272,13 +2272,13 @@ where [refTable].[Country] = ?</property>
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">(DT_R8)(#{Package\Load Port\OLE DB Source.Outputs[OLE DB Source Output].Columns[P_DistanceFromOslo]} / (DT_R8)"1.852")</property>
+                          name="Expression">(DT_R8)(#{Package\Load Port\OLE DB Source.Outputs[OLE DB Source Output].Columns[P_DistanceFromOslo]} / (DT_R8)"1,852")</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">(DT_R8)(P_DistanceFromOslo / (DT_R8)"1.852")</property>
+                          name="FriendlyExpression">(DT_R8)(P_DistanceFromOslo / (DT_R8)"1,852")</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -2294,13 +2294,13 @@ where [refTable].[Country] = ?</property>
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">(DT_R8)(#{Package\Load Port\OLE DB Source.Outputs[OLE DB Source Output].Columns[P_DistanceFromPiraeus]} / (DT_R8)"1.852")</property>
+                          name="Expression">(DT_R8)(#{Package\Load Port\OLE DB Source.Outputs[OLE DB Source Output].Columns[P_DistanceFromPiraeus]} / (DT_R8)"1,852")</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">(DT_R8)(P_DistanceFromPiraeus / (DT_R8)"1.852")</property>
+                          name="FriendlyExpression">(DT_R8)(P_DistanceFromPiraeus / (DT_R8)"1,852")</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -3113,13 +3113,13 @@ where [refTable].[Country] = ?</property>
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">#{Package\Load Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Yearcost]} * (DT_R8)"0.92"</property>
+                          name="Expression">#{Package\Load Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Yearcost]} * (DT_R8)"0,92"</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">Sh_Yearcost * (DT_R8)"0.92"</property>
+                          name="FriendlyExpression">Sh_Yearcost * (DT_R8)"0,92"</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
@@ -4386,13 +4386,13 @@ where [refTable].[Name] = ?</property>
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">(DT_R8)(#{Package\Load Shipment\OLE DB Source.Outputs[OLE DB Source Output].Columns[Distance]} / (DT_R8)"1.852")</property>
+                          name="Expression">(DT_R8)(#{Package\Load Shipment\OLE DB Source.Outputs[OLE DB Source Output].Columns[Distance]} / (DT_R8)"1,852")</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">(DT_R8)(Distance / (DT_R8)"1.852")</property>
+                          name="FriendlyExpression">(DT_R8)(Distance / (DT_R8)"1,852")</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -5656,13 +5656,13 @@ where [refTable].[Name] = ?</property>
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">(DT_R8)(#{Package\Load VoyagePort\OLE DB Source.Outputs[OLE DB Source Output].Columns[Vp_Traject_Distance]} / (DT_R8)"1.852")</property>
+                          name="Expression">(DT_R8)(#{Package\Load VoyagePort\OLE DB Source.Outputs[OLE DB Source Output].Columns[Vp_Traject_Distance]} / (DT_R8)"1,852")</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">(DT_R8)(Vp_Traject_Distance / (DT_R8)"1.852")</property>
+                          name="FriendlyExpression">(DT_R8)(Vp_Traject_Distance / (DT_R8)"1,852")</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
