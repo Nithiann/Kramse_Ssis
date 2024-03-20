@@ -4,7 +4,7 @@ hoe lang stil op een haven
 
 
 Alles moet omgezet worden naar een generieke waardes. Op het moment zitten er verschillende waardes door elkaar.
-EEN NAUTICAL MILE (NMI) = KM * 1.852
+EEN NAUTICAL MILE (NMI) = KM / 1.852
 1 TEU = 6.1M
 
 
@@ -35,3 +35,17 @@ ERP Consignor tabel:
 19-03
 na-lopen berekeningen
 na-lopen TEU convertion
+
+
+----------------------------
+Dimensies:
+	- Port
+	- Ship
+	- Item
+	- Container
+	- Consignor
+
+voor de loadfactor moet je als eerst de totaleTEU van het schip berekenen
+containerAmount(Containers) * TEU = TotalTEU
+laadfactor = TotalTEU / ship_MaxTEU
+
