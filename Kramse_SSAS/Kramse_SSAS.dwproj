@@ -60,7 +60,7 @@
           <ConfigurationSetting>
             <Id>Kramse PSA</Id>
             <Name>Kramse PSA</Name>
-            <Value xsi:type="xsd:string">Provider=SQLOLEDB.1;Data Source=DESKTOP-FJQ6KVQ;Integrated Security=SSPI;Initial Catalog=Kramse_PSA</Value>
+            <Value xsi:type="xsd:string">Provider=SQLOLEDB.1;Data Source=DESKTOP-FJQ6KVQ;Integrated Security=SSPI;Initial Catalog=KramsePSA</Value>
           </ConfigurationSetting>
         </ConnectionMappings>
         <ConnectionSecurityMappings>
