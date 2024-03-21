@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="3  ERP to PSA"
   DTS:PackageType="5"
-  DTS:VersionBuild="10"
-  DTS:VersionGUID="{13331132-D0E6-447A-90E4-076D5CFD9A96}">
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{170B9419-1366-472A-BD55-66B683DA7DB0}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -47,7 +47,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Consignor]</property>
+                  name="OpenRowset">[dbo].[D_Consignor]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -418,7 +418,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Container]</property>
+                  name="OpenRowset">[dbo].[D_Container]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -526,8 +526,14 @@
                       cachedName="EuroPricePerSeaMile"
                       cachedPrecision="18"
                       cachedScale="2"
-                      externalMetadataColumnId="Package\D_Container\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EuroPricePerKm]"
+                      externalMetadataColumnId="Package\D_Container\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EuroPricePerSeaMile]"
                       lineageId="Package\D_Container\OLE DB Source.Outputs[OLE DB Source Output].Columns[EuroPricePerSeaMile]" />
+                    <inputColumn
+                      refId="Package\D_Container\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TEU]"
+                      cachedDataType="i4"
+                      cachedName="TEU"
+                      externalMetadataColumnId="Package\D_Container\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TEU]"
+                      lineageId="Package\D_Container\OLE DB Source.Outputs[OLE DB Source Output].Columns[TEU]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -566,11 +572,15 @@
                       precision="18"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\D_Container\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EuroPricePerKm]"
+                      refId="Package\D_Container\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EuroPricePerSeaMile]"
                       dataType="numeric"
-                      name="EuroPricePerKm"
+                      name="EuroPricePerSeaMile"
                       precision="18"
                       scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\D_Container\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TEU]"
+                      dataType="i4"
+                      name="TEU" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -908,7 +918,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Item]</property>
+                  name="OpenRowset">[dbo].[D_Item]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1317,7 +1327,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Port]</property>
+                  name="OpenRowset">[dbo].[D_Port]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1404,13 +1414,13 @@
                       refId="Package\D_Port\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[P_DistanceFromOsloSeaMiles]"
                       cachedDataType="r8"
                       cachedName="P_DistanceFromOsloSeaMiles"
-                      externalMetadataColumnId="Package\D_Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_DistanceFromOslo]"
+                      externalMetadataColumnId="Package\D_Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_DistanceFromOsloSeaMiles]"
                       lineageId="Package\D_Port\OLE DB Source.Outputs[OLE DB Source Output].Columns[P_DistanceFromOsloSeaMiles]" />
                     <inputColumn
                       refId="Package\D_Port\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[P_DistanceFromPiraeusSeaMiles]"
                       cachedDataType="r8"
                       cachedName="P_DistanceFromPiraeusSeaMiles"
-                      externalMetadataColumnId="Package\D_Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_DistanceFromPiraeus]"
+                      externalMetadataColumnId="Package\D_Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_DistanceFromPiraeusSeaMiles]"
                       lineageId="Package\D_Port\OLE DB Source.Outputs[OLE DB Source Output].Columns[P_DistanceFromPiraeusSeaMiles]" />
                   </inputColumns>
                   <externalMetadataColumns
@@ -1435,13 +1445,13 @@
                       length="50"
                       name="P_Country" />
                     <externalMetadataColumn
-                      refId="Package\D_Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_DistanceFromOslo]"
-                      dataType="i4"
-                      name="P_DistanceFromOslo" />
+                      refId="Package\D_Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_DistanceFromOsloSeaMiles]"
+                      dataType="r8"
+                      name="P_DistanceFromOsloSeaMiles" />
                     <externalMetadataColumn
-                      refId="Package\D_Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_DistanceFromPiraeus]"
-                      dataType="i4"
-                      name="P_DistanceFromPiraeus" />
+                      refId="Package\D_Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_DistanceFromPiraeusSeaMiles]"
+                      dataType="r8"
+                      name="P_DistanceFromPiraeusSeaMiles" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1716,7 +1726,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Ship]</property>
+                  name="OpenRowset">[dbo].[D_Ship]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1828,6 +1838,42 @@
                       cachedName="Sh_Width"
                       externalMetadataColumnId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Sh_Width]"
                       lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Width]" />
+                    <inputColumn
+                      refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      cachedDataType="r8"
+                      cachedName="AnnualAverageFuelConsumptionKGperSeaMile"
+                      externalMetadataColumnId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnnualAverageFuelConsumptionKGperSeaMile]" />
+                    <inputColumn
+                      refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      cachedDataType="r8"
+                      cachedName="AnnualAverageCO2EmissionPerKgSeaMile"
+                      externalMetadataColumnId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnnualAverageCO2EmissionPerKgSeaMile]" />
+                    <inputColumn
+                      refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TotalHoursSpentAtSea]"
+                      cachedDataType="r8"
+                      cachedName="TotalHoursSpentAtSea"
+                      externalMetadataColumnId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalHoursSpentAtSea]"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalHoursSpentAtSea]" />
+                    <inputColumn
+                      refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ReportYear]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ReportYear"
+                      externalMetadataColumnId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReportYear]"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReportYear]" />
+                    <inputColumn
+                      refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TotalFuelConsumptionInMTonnes]"
+                      cachedDataType="r8"
+                      cachedName="TotalFuelConsumptionInMTonnes"
+                      externalMetadataColumnId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalFuelConsumptionInMTonnes]"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalFuelConsumptionInMTonnes]" />
+                    <inputColumn
+                      refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TotalCO2EmissionsInMTonnes]"
+                      cachedDataType="r8"
+                      cachedName="TotalCO2EmissionsInMTonnes"
+                      externalMetadataColumnId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalCO2EmissionsInMTonnes]"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalCO2EmissionsInMTonnes]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1869,6 +1915,30 @@
                       refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Sh_Width]"
                       dataType="i4"
                       name="Sh_Width" />
+                    <externalMetadataColumn
+                      refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      dataType="r8"
+                      name="AnnualAverageFuelConsumptionKGperSeaMile" />
+                    <externalMetadataColumn
+                      refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      dataType="r8"
+                      name="AnnualAverageCO2EmissionPerKgSeaMile" />
+                    <externalMetadataColumn
+                      refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalHoursSpentAtSea]"
+                      dataType="r8"
+                      name="TotalHoursSpentAtSea" />
+                    <externalMetadataColumn
+                      refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReportYear]"
+                      dataType="dbTimeStamp"
+                      name="ReportYear" />
+                    <externalMetadataColumn
+                      refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalFuelConsumptionInMTonnes]"
+                      dataType="r8"
+                      name="TotalFuelConsumptionInMTonnes" />
+                    <externalMetadataColumn
+                      refId="Package\D_Ship\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalCO2EmissionsInMTonnes]"
+                      dataType="r8"
+                      name="TotalCO2EmissionsInMTonnes" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -2041,6 +2111,60 @@
                       lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Width]"
                       name="Sh_Width"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      name="AnnualAverageFuelConsumptionKGperSeaMile"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      name="AnnualAverageCO2EmissionPerKgSeaMile"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalHoursSpentAtSea]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalHoursSpentAtSea]"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalHoursSpentAtSea]"
+                      name="TotalHoursSpentAtSea"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReportYear]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReportYear]"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReportYear]"
+                      name="ReportYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalFuelConsumptionInMTonnes]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalFuelConsumptionInMTonnes]"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalFuelConsumptionInMTonnes]"
+                      name="TotalFuelConsumptionInMTonnes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalCO2EmissionsInMTonnes]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalCO2EmissionsInMTonnes]"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalCO2EmissionsInMTonnes]"
+                      name="TotalCO2EmissionsInMTonnes"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2082,6 +2206,30 @@
                       refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_Width]"
                       dataType="i4"
                       name="Sh_Width" />
+                    <externalMetadataColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      dataType="r8"
+                      name="AnnualAverageFuelConsumptionKGperSeaMile" />
+                    <externalMetadataColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      dataType="r8"
+                      name="AnnualAverageCO2EmissionPerKgSeaMile" />
+                    <externalMetadataColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalHoursSpentAtSea]"
+                      dataType="r8"
+                      name="TotalHoursSpentAtSea" />
+                    <externalMetadataColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReportYear]"
+                      dataType="dbTimeStamp"
+                      name="ReportYear" />
+                    <externalMetadataColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalFuelConsumptionInMTonnes]"
+                      dataType="r8"
+                      name="TotalFuelConsumptionInMTonnes" />
+                    <externalMetadataColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalCO2EmissionsInMTonnes]"
+                      dataType="r8"
+                      name="TotalCO2EmissionsInMTonnes" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -2137,6 +2285,36 @@
                       lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_Width]"
                       name="Sh_Width" />
                     <outputColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      dataType="r8"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      name="AnnualAverageFuelConsumptionKGperSeaMile" />
+                    <outputColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      dataType="r8"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      name="AnnualAverageCO2EmissionPerKgSeaMile" />
+                    <outputColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalHoursSpentAtSea]"
+                      dataType="r8"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalHoursSpentAtSea]"
+                      name="TotalHoursSpentAtSea" />
+                    <outputColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReportYear]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReportYear]"
+                      name="ReportYear" />
+                    <outputColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalFuelConsumptionInMTonnes]"
+                      dataType="r8"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalFuelConsumptionInMTonnes]"
+                      name="TotalFuelConsumptionInMTonnes" />
+                    <outputColumn
+                      refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalCO2EmissionsInMTonnes]"
+                      dataType="r8"
+                      lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalCO2EmissionsInMTonnes]"
+                      name="TotalCO2EmissionsInMTonnes" />
+                    <outputColumn
                       refId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
                       lineageId="Package\D_Ship\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
@@ -2177,6 +2355,21 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\F_Shipment"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{290E6816-7593-4024-A7D3-841C2EABB630}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="F_Shipment"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -2221,6 +2414,46 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
       DTS:To="Package\D_Port" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{1DCE1469-E5A1-4A12-A052-CF4FC4FE647E}"
+      DTS:From="Package\D_Item"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\F_Shipment" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{8FD4951F-9EEA-4BCC-B02D-6759ECED6794}"
+      DTS:From="Package\D_Consignor"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\F_Shipment" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{AA1A61AF-0BD7-4374-906B-ACA6D88480E7}"
+      DTS:From="Package\D_Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\F_Shipment" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{7431BD49-8FF7-447E-8653-B330DA12A336}"
+      DTS:From="Package\D_Ship"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\F_Shipment" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{196FBF7B-4629-453A-A071-E1AB378FB8FB}"
+      DTS:From="Package\D_Port"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\F_Shipment" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -2233,57 +2466,57 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="138.4,41.6"
           Id="Package\D_Consignor"
-          TopLeft="215.714286173485,135.352941057828" />
+          TopLeft="215.714286173485,136.117646939511" />
         <NodeLayout
           Size="136.8,41.6"
           Id="Package\D_Container"
-          TopLeft="367.857143640214,136.117646939511" />
+          TopLeft="367.857143640214,136.882352821194" />
         <NodeLayout
           Size="113.6,41.6"
           Id="Package\D_Item"
-          TopLeft="81.4285716019115,133.058823412781" />
+          TopLeft="81.4285716019115,133.823529294464" />
         <NodeLayout
           Size="110.4,41.6"
           Id="Package\D_Port"
-          TopLeft="657.142858541741,133.058823412781" />
+          TopLeft="657.142858541741,133.823529294464" />
         <NodeLayout
           Size="112,41.6"
           Id="Package\D_Ship"
-          TopLeft="524.285715401781,132.294117531098" />
+          TopLeft="524.285715401781,133.058823412781" />
         <NodeLayout
           Size="163.2,41.6"
           Id="Package\Empty PSA Tables"
-          TopLeft="263.571429132503,25.99999997721" />
+          TopLeft="350.714286460864,0" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="306.371429132503,67.59999997721">
+          TopLeft="380.580953127531,41.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-168.142857530592,65.458823435571"
+              EndConnector="-242.352381525619,92.2235292944637"
               Start="0,0"
-              End="-168.142857530592,57.958823435571">
+              End="-242.352381525619,84.7235292944637">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18.5212029183476" />
+                    End="0,20.7106107200477" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,18.5212029183476"
-                    Point2="0,22.5212029183476"
-                    Point3="-4,22.5212029183476" />
+                    Point1="0,20.7106107200477"
+                    Point2="0,24.7106107200477"
+                    Point3="-4,24.7106107200477" />
                   <mssgle:LineSegment
-                    End="-164.142857530592,22.5212029183476" />
+                    End="-238.352381525619,24.7106107200477" />
                   <mssgle:CubicBezierSegment
-                    Point1="-164.142857530592,22.5212029183476"
-                    Point2="-168.142857530592,22.5212029183476"
-                    Point3="-168.142857530592,26.5212029183476" />
+                    Point1="-238.352381525619,24.7106107200477"
+                    Point2="-242.352381525619,24.7106107200477"
+                    Point3="-242.352381525619,28.7106107200477" />
                   <mssgle:LineSegment
-                    End="-168.142857530592,57.958823435571" />
+                    End="-242.352381525619,84.7235292944637" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2294,30 +2527,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="345.171429132503,67.59999997721">
+          TopLeft="406.447619794198,41.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-60.257142959018,67.752941080618"
+              EndConnector="-121.533333620713,94.5176469395107"
               Start="0,0"
-              End="-60.257142959018,60.252941080618">
+              End="-121.533333620713,87.0176469395107">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.876470540309" />
+                    End="0,34.3576470104034" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,29.876470540309"
-                    Point2="0,33.876470540309"
-                    Point3="-4,33.876470540309" />
+                    Point1="0,34.3576470104034"
+                    Point2="0,38.3576470104034"
+                    Point3="-4,38.3576470104034" />
                   <mssgle:LineSegment
-                    End="-56.257142959018,33.876470540309" />
+                    End="-117.533333620713,38.3576470104034" />
                   <mssgle:CubicBezierSegment
-                    Point1="-56.257142959018,33.876470540309"
-                    Point2="-60.257142959018,33.876470540309"
-                    Point3="-60.257142959018,37.876470540309" />
+                    Point1="-117.533333620713,38.3576470104034"
+                    Point2="-121.533333620713,38.3576470104034"
+                    Point3="-121.533333620713,42.3576470104034" />
                   <mssgle:LineSegment
-                    End="-60.257142959018,60.252941080618" />
+                    End="-121.533333620713,87.0176469395107" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2328,30 +2561,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="383.971429132503,67.59999997721">
+          TopLeft="434.285715050539,41.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="52.2857145077111,68.517646962301"
+              EndConnector="0,95.2823528211937"
               Start="0,0"
-              End="52.2857145077111,61.017646962301">
+              End="0,87.7823528211937">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19.5735955786695" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,19.5735955786695"
-                    Point2="0,23.5735955786695"
-                    Point3="4,23.5735955786695" />
-                  <mssgle:LineSegment
-                    End="48.2857145077111,23.5735955786695" />
-                  <mssgle:CubicBezierSegment
-                    Point1="48.2857145077111,23.5735955786695"
-                    Point2="52.2857145077111,23.5735955786695"
-                    Point3="52.2857145077111,27.5735955786695" />
-                  <mssgle:LineSegment
-                    End="52.2857145077111,61.017646962301" />
+                    End="0,87.7823528211937" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2362,30 +2583,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="391.731429132503,67.59999997721">
+          TopLeft="458.180953127531,41.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="188.554286269278,64.6941175538879"
+              EndConnector="122.10476227425,91.4588234127807"
               Start="0,0"
-              End="188.554286269278,57.1941175538879">
+              End="122.10476227425,83.9588234127807">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.43485835981" />
+                    End="0,33.1162992102353" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,15.43485835981"
-                    Point2="0,19.43485835981"
-                    Point3="4,19.43485835981" />
+                    Point1="0,33.1162992102353"
+                    Point2="0,37.1162992102353"
+                    Point3="4,37.1162992102353" />
                   <mssgle:LineSegment
-                    End="184.554286269278,19.43485835981" />
+                    End="118.10476227425,37.1162992102353" />
                   <mssgle:CubicBezierSegment
-                    Point1="184.554286269278,19.43485835981"
-                    Point2="188.554286269278,19.43485835981"
-                    Point3="188.554286269278,23.43485835981" />
+                    Point1="118.10476227425,37.1162992102353"
+                    Point2="122.10476227425,37.1162992102353"
+                    Point3="122.10476227425,41.1162992102353" />
                   <mssgle:LineSegment
-                    End="188.554286269278,57.1941175538879" />
+                    End="122.10476227425,83.9588234127807" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2396,30 +2617,204 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="396.904762465836,67.59999997721">
+          TopLeft="484.047619794198,41.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="315.438096075905,65.4588234355705"
+              EndConnector="228.295238747543,92.2235292944637"
               Start="0,0"
-              End="315.438096075905,57.9588234355705">
+              End="228.295238747543,84.7235292944637">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13.5392062793873" />
+                    End="0,20.7106107200477" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,13.5392062793873"
-                    Point2="0,17.5392062793873"
-                    Point3="4,17.5392062793873" />
+                    Point1="0,20.7106107200477"
+                    Point2="0,24.7106107200477"
+                    Point3="4,24.7106107200477" />
                   <mssgle:LineSegment
-                    End="311.438096075905,17.5392062793873" />
+                    End="224.295238747543,24.7106107200477" />
                   <mssgle:CubicBezierSegment
-                    Point1="311.438096075905,17.5392062793873"
-                    Point2="315.438096075905,17.5392062793873"
-                    Point3="315.438096075905,21.5392062793873" />
+                    Point1="224.295238747543,24.7106107200477"
+                    Point2="228.295238747543,24.7106107200477"
+                    Point3="228.295238747543,28.7106107200477" />
                   <mssgle:LineSegment
-                    End="315.438096075905,57.9588234355705" />
+                    End="228.295238747543,84.7235292944637" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="134.4,41.6"
+          Id="Package\F_Shipment"
+          TopLeft="357.485715039896,324.235293833442" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="138.228571601911,175.423529294464">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="244.323810104651,148.811764538979"
+              Start="0,0"
+              End="244.323810104651,141.311764538979">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,104.383134866539" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,104.383134866539"
+                    Point2="0,108.383134866539"
+                    Point3="4,108.383134866539" />
+                  <mssgle:LineSegment
+                    End="240.323810104651,108.383134866539" />
+                  <mssgle:CubicBezierSegment
+                    Point1="240.323810104651,108.383134866539"
+                    Point2="244.323810104651,108.383134866539"
+                    Point3="244.323810104651,112.383134866539" />
+                  <mssgle:LineSegment
+                    End="244.323810104651,141.311764538979" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="284.914286173485,177.717646939511">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="118.704762199744,146.517646893932"
+              Start="0,0"
+              End="118.704762199744,139.017646893932">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,82.87634592299" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,82.87634592299"
+                    Point2="0,86.87634592299"
+                    Point3="4,86.87634592299" />
+                  <mssgle:LineSegment
+                    End="114.704762199744,86.87634592299" />
+                  <mssgle:CubicBezierSegment
+                    Point1="114.704762199744,86.87634592299"
+                    Point2="118.704762199744,86.87634592299"
+                    Point3="118.704762199744,90.87634592299" />
+                  <mssgle:LineSegment
+                    End="118.704762199744,139.017646893932" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="436.257143640214,178.482352821194">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11.5714286003185,145.752941012249"
+              Start="0,0"
+              End="-11.5714286003185,138.252941012249">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.8764705061243" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,68.8764705061243"
+                    Point2="0,72.8764705061243"
+                    Point3="-4,72.8764705061243" />
+                  <mssgle:LineSegment
+                    End="-7.57142860031848,72.8764705061243" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.57142860031848,72.8764705061243"
+                    Point2="-11.5714286003185,72.8764705061243"
+                    Point3="-11.5714286003185,76.8764705061243" />
+                  <mssgle:LineSegment
+                    End="-11.5714286003185,138.252941012249" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="580.285715401781,174.658823412781">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-134.533333695219,149.576470420662"
+              Start="0,0"
+              End="-134.533333695219,142.076470420662">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,84.6900483435452" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,84.6900483435452"
+                    Point2="0,88.6900483435452"
+                    Point3="-4,88.6900483435452" />
+                  <mssgle:LineSegment
+                    End="-130.533333695219,88.6900483435452" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-130.533333695219,88.6900483435452"
+                    Point2="-134.533333695219,88.6900483435452"
+                    Point3="-134.533333695219,92.6900483435452" />
+                  <mssgle:LineSegment
+                    End="-134.533333695219,142.076470420662" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="712.342858541741,175.423529294464">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-245.523810168512,148.811764538979"
+              Start="0,0"
+              End="-245.523810168512,141.311764538979">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,104.383134866539" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,104.383134866539"
+                    Point2="0,108.383134866539"
+                    Point3="-4,108.383134866539" />
+                  <mssgle:LineSegment
+                    End="-241.523810168512,108.383134866539" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-241.523810168512,108.383134866539"
+                    Point2="-245.523810168512,108.383134866539"
+                    Point3="-245.523810168512,112.383134866539" />
+                  <mssgle:LineSegment
+                    End="-245.523810168512,141.311764538979" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2437,13 +2832,13 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\D_Consignor\OLE DB Source"
-          TopLeft="270.999995961785,128.99999807775" />
-        <NodeLayout
           Size="170.4,41.6"
           Id="Package\D_Consignor\OLE DB Destination"
           TopLeft="315.999995291233,274.999995902181" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\D_Consignor\OLE DB Source"
+          TopLeft="270.999995961785,128.99999807775" />
         <EdgeLayout
           Id="Package\D_Consignor.Paths[OLE DB Source Output]"
           TopLeft="345.799995961785,170.59999807775">
@@ -2481,6 +2876,32 @@
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\D_Consignor\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\D_Consignor\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\D_Container">
     <LayoutInfo>
@@ -2493,33 +2914,33 @@
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\D_Container\OLE DB Destination"
-          TopLeft="381.999994307757,345.999994844198" />
+          TopLeft="382.999994292856,345.999994844198" />
         <EdgeLayout
           Id="Package\D_Container.Paths[OLE DB Source Output]"
           TopLeft="408.799995023012,268.599996617436">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="58.3999992847443,77.3999982267617"
+              EndConnector="59.3999992698438,77.399998226762"
               Start="0,0"
-              End="58.3999992847443,69.8999982267617">
+              End="59.3999992698438,69.899998226762">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,34.6999991133809" />
+                    End="0,34.699999113381" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,34.6999991133809"
-                    Point2="0,38.6999991133809"
-                    Point3="4,38.6999991133809" />
+                    Point1="0,34.699999113381"
+                    Point2="0,38.699999113381"
+                    Point3="4,38.699999113381" />
                   <mssgle:LineSegment
-                    End="54.3999992847443,38.6999991133809" />
+                    End="55.3999992698438,38.699999113381" />
                   <mssgle:CubicBezierSegment
-                    Point1="54.3999992847443,38.6999991133809"
-                    Point2="58.3999992847443,38.6999991133809"
-                    Point3="58.3999992847443,42.6999991133809" />
+                    Point1="55.3999992698438,38.699999113381"
+                    Point2="59.3999992698438,38.699999113381"
+                    Point3="59.3999992698438,42.699999113381" />
                   <mssgle:LineSegment
-                    End="58.3999992847443,69.8999982267617" />
+                    End="59.3999992698438,69.899998226762" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2531,6 +2952,32 @@
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\D_Container\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\D_Container\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\D_Item">
     <LayoutInfo>
@@ -2581,6 +3028,32 @@
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\D_Item\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\D_Item\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\D_Port">
     <LayoutInfo>
@@ -2638,6 +3111,32 @@
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\D_Port\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\D_Port\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\D_Ship">
     <LayoutInfo>
@@ -2677,97 +3176,6 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\D_Item\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\D_Item\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\D_Consignor\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\D_Consignor\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\D_Container\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\D_Container\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\D_Ship\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\D_Ship\OLE DB Destination">
     <Properties>
       <Property>
@@ -2781,20 +3189,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\D_Port\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\D_Port\OLE DB Destination">
+    design-time-name="Package\D_Ship\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
