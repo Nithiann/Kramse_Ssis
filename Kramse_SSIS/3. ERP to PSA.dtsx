@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="3  ERP to PSA"
   DTS:PackageType="5"
-  DTS:VersionBuild="26"
-  DTS:VersionGUID="{BC1B8D47-1AEE-4E82-94EA-A31B98323008}">
+  DTS:VersionBuild="49"
+  DTS:VersionGUID="{554342F8-C5A3-4769-9494-0C7445B14FAC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -2356,7 +2356,569 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{165DB7E0-5575-4EDC-8885-2FC8D4FAC63D}"
-          SQLTask:SqlStatementSource="DELETE FROM F_ShipmentVoyage;&#xA;DELETE FROM D_Port;&#xA;DELETE FROM D_Ship;&#xA;DELETE FROM D_Item;&#xA;DELETE FROM D_Container;&#xA;DELETE FROM D_Consignor;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="DELETE FROM F_ShipmentVoyage;&#xA;DELETE FROM F_ShipMeasures;&#xA;DROP VIEW IF EXISTS View_StayDays;&#xA;DELETE FROM D_Port;&#xA;DELETE FROM D_Ship;&#xA;DELETE FROM D_Item;&#xA;DELETE FROM D_Container;&#xA;DELETE FROM D_Consignor;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\F_ShipMeasures"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6A85CD72-9CC4-400F-BC4A-6521F65D0F7B}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="F_ShipMeasures"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\F_ShipMeasures\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[F_ShipMeasures]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\F_ShipMeasures\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{165DB7E0-5575-4EDC-8885-2FC8D4FAC63D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Kramse_PSA]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      cachedDataType="r8"
+                      cachedName="AnnualAverageFuelConsumptionKGperSeaMile"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnnualAverageFuelConsumptionKGperSeaMile]" />
+                    <inputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      cachedDataType="r8"
+                      cachedName="AnnualAverageCO2EmissionPerKgSeaMile"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnnualAverageCO2EmissionPerKgSeaMile]" />
+                    <inputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TotalHoursSpentAtSea]"
+                      cachedDataType="r8"
+                      cachedName="TotalHoursSpentAtSea"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalHoursSpentAtSea]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalHoursSpentAtSea]" />
+                    <inputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ReportYear]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ReportYear"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReportYear]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReportYear]" />
+                    <inputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TotalFuelConsumptionInMTonnes]"
+                      cachedDataType="r8"
+                      cachedName="TotalFuelConsumptionInMTonnes"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalFuelConsumptionInMTonnes]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalFuelConsumptionInMTonnes]" />
+                    <inputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TotalCO2EmissionsInMTonnes]"
+                      cachedDataType="r8"
+                      cachedName="TotalCO2EmissionsInMTonnes"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalCO2EmissionsInMTonnes]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalCO2EmissionsInMTonnes]" />
+                    <inputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[VS_Shipid]"
+                      cachedDataType="i4"
+                      cachedName="VS_Shipid"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShipId]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[VS_Shipid]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShipId]"
+                      dataType="i4"
+                      name="ShipId" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      dataType="r8"
+                      name="AnnualAverageFuelConsumptionKGperSeaMile" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      dataType="r8"
+                      name="AnnualAverageCO2EmissionPerKgSeaMile" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalHoursSpentAtSea]"
+                      dataType="r8"
+                      name="TotalHoursSpentAtSea" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReportYear]"
+                      dataType="dbTimeStamp"
+                      name="ReportYear" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalFuelConsumptionInMTonnes]"
+                      dataType="r8"
+                      name="TotalFuelConsumptionInMTonnes" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalCO2EmissionsInMTonnes]"
+                      dataType="r8"
+                      name="TotalCO2EmissionsInMTonnes" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\F_ShipMeasures\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\F_ShipMeasures\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\F_ShipMeasures\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\F_ShipMeasures\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Ship]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\F_ShipMeasures\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{D03D30E2-9B8E-4B69-8CE4-21027634FCB3}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Kramse_ERP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[VS_Shipid]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[VS_Shipid]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[VS_Shipid]"
+                      name="VS_Shipid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Shipname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_Shipname]"
+                      length="50"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Shipname]"
+                      name="Sh_Shipname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_MaxTEU]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_MaxTEU]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_MaxTEU]"
+                      name="Sh_MaxTEU"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_SpeedInKnots]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_SpeedInKnots]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_SpeedInKnots]"
+                      name="Sh_SpeedInKnots"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_SpeedInKm_H]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_SpeedInKm_H]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_SpeedInKm_H]"
+                      name="Sh_SpeedInKm_H"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_Country]"
+                      length="50"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Country]"
+                      name="Sh_Country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Yearcost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_Yearcost]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Yearcost]"
+                      name="Sh_Yearcost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Length]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_Length]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Length]"
+                      name="Sh_Length"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Width]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_Width]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[Sh_Width]"
+                      name="Sh_Width"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      name="AnnualAverageFuelConsumptionKGperSeaMile"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      name="AnnualAverageCO2EmissionPerKgSeaMile"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalHoursSpentAtSea]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalHoursSpentAtSea]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalHoursSpentAtSea]"
+                      name="TotalHoursSpentAtSea"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReportYear]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReportYear]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReportYear]"
+                      name="ReportYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalFuelConsumptionInMTonnes]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalFuelConsumptionInMTonnes]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalFuelConsumptionInMTonnes]"
+                      name="TotalFuelConsumptionInMTonnes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalCO2EmissionsInMTonnes]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalCO2EmissionsInMTonnes]"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalCO2EmissionsInMTonnes]"
+                      name="TotalCO2EmissionsInMTonnes"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[VS_Shipid]"
+                      dataType="i4"
+                      name="VS_Shipid" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_Shipname]"
+                      dataType="wstr"
+                      length="50"
+                      name="Sh_Shipname" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_MaxTEU]"
+                      dataType="i4"
+                      name="Sh_MaxTEU" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_SpeedInKnots]"
+                      dataType="i4"
+                      name="Sh_SpeedInKnots" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_SpeedInKm_H]"
+                      dataType="i4"
+                      name="Sh_SpeedInKm_H" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_Country]"
+                      dataType="wstr"
+                      length="50"
+                      name="Sh_Country" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_Yearcost]"
+                      dataType="cy"
+                      name="Sh_Yearcost" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_Length]"
+                      dataType="i4"
+                      name="Sh_Length" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Sh_Width]"
+                      dataType="i4"
+                      name="Sh_Width" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      dataType="r8"
+                      name="AnnualAverageFuelConsumptionKGperSeaMile" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      dataType="r8"
+                      name="AnnualAverageCO2EmissionPerKgSeaMile" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalHoursSpentAtSea]"
+                      dataType="r8"
+                      name="TotalHoursSpentAtSea" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReportYear]"
+                      dataType="dbTimeStamp"
+                      name="ReportYear" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalFuelConsumptionInMTonnes]"
+                      dataType="r8"
+                      name="TotalFuelConsumptionInMTonnes" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalCO2EmissionsInMTonnes]"
+                      dataType="r8"
+                      name="TotalCO2EmissionsInMTonnes" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[VS_Shipid]"
+                      dataType="i4"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[VS_Shipid]"
+                      name="VS_Shipid" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_Shipname]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_Shipname]"
+                      name="Sh_Shipname" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_MaxTEU]"
+                      dataType="i4"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_MaxTEU]"
+                      name="Sh_MaxTEU" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_SpeedInKnots]"
+                      dataType="i4"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_SpeedInKnots]"
+                      name="Sh_SpeedInKnots" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_SpeedInKm_H]"
+                      dataType="i4"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_SpeedInKm_H]"
+                      name="Sh_SpeedInKm_H" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_Country]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_Country]"
+                      name="Sh_Country" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_Yearcost]"
+                      dataType="cy"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_Yearcost]"
+                      name="Sh_Yearcost" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_Length]"
+                      dataType="i4"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_Length]"
+                      name="Sh_Length" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_Width]"
+                      dataType="i4"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Sh_Width]"
+                      name="Sh_Width" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      dataType="r8"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AnnualAverageFuelConsumptionKGperSeaMile]"
+                      name="AnnualAverageFuelConsumptionKGperSeaMile" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      dataType="r8"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AnnualAverageCO2EmissionPerKgSeaMile]"
+                      name="AnnualAverageCO2EmissionPerKgSeaMile" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalHoursSpentAtSea]"
+                      dataType="r8"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalHoursSpentAtSea]"
+                      name="TotalHoursSpentAtSea" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReportYear]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReportYear]"
+                      name="ReportYear" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalFuelConsumptionInMTonnes]"
+                      dataType="r8"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalFuelConsumptionInMTonnes]"
+                      name="TotalFuelConsumptionInMTonnes" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalCO2EmissionsInMTonnes]"
+                      dataType="r8"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalCO2EmissionsInMTonnes]"
+                      name="TotalCO2EmissionsInMTonnes" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\F_ShipMeasures.Paths[OLE DB Source Output]"
+              endId="Package\F_ShipMeasures\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\F_ShipMeasures\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -2387,15 +2949,15 @@
                   name="Derived Column Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\F_Shipment\Calculate LoadFactor.Inputs[Derived Column Input].Columns[TotalTEU]"
-                      cachedDataType="i4"
-                      cachedName="TotalTEU"
-                      lineageId="Package\F_Shipment\Calculate totalTEU.Outputs[Derived Column Output].Columns[TotalTEU]" />
-                    <inputColumn
                       refId="Package\F_Shipment\Calculate LoadFactor.Inputs[Derived Column Input].Columns[Sh_MaxTEU]"
                       cachedDataType="i4"
                       cachedName="Sh_MaxTEU"
                       lineageId="Package\F_Shipment\Lookup max shipTEU.Outputs[Lookup Match Output].Columns[Sh_MaxTEU]" />
+                    <inputColumn
+                      refId="Package\F_Shipment\Calculate LoadFactor.Inputs[Derived Column Input].Columns[TotalTEU]"
+                      cachedDataType="i4"
+                      cachedName="TotalTEU"
+                      lineageId="Package\F_Shipment\Calculate totalTEU.Outputs[Derived Column Output].Columns[TotalTEU]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -3596,8 +4158,7 @@
                       name="ItemId" />
                     <externalMetadataColumn
                       refId="Package\F_Shipment\F_ShipmentVoyage.Inputs[OLE DB Destination Input].ExternalColumns[DepartDate]"
-                      dataType="wstr"
-                      length="10"
+                      dataType="dbTimeStamp"
                       name="DepartDate" />
                     <externalMetadataColumn
                       refId="Package\F_Shipment\F_ShipmentVoyage.Inputs[OLE DB Destination Input].ExternalColumns[PortIdCurrent]"
@@ -3609,8 +4170,7 @@
                       name="PortIdNext" />
                     <externalMetadataColumn
                       refId="Package\F_Shipment\F_ShipmentVoyage.Inputs[OLE DB Destination Input].ExternalColumns[ArriveDate]"
-                      dataType="wstr"
-                      length="10"
+                      dataType="dbTimeStamp"
                       name="ArriveDate" />
                     <externalMetadataColumn
                       refId="Package\F_Shipment\F_ShipmentVoyage.Inputs[OLE DB Destination Input].ExternalColumns[ContainerCount]"
@@ -6020,6 +6580,23 @@ where [refTable].[Id] = ?</property>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\View StayDays"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8AEC39C7-16B4-4D72-8956-7FB6E104FBED}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="View StayDays"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{165DB7E0-5575-4EDC-8885-2FC8D4FAC63D}"
+          SQLTask:SqlStatementSource="CREATE VIEW View_StayDays AS&#xA;SELECT CurrentPort.VoyageId, CurrentPort.PortIdCurrent AS CurrentPortId, NextPort.PortIdCurrent AS NextPortId, CurrentPort.DepartDate AS currentDepart, CurrentPort.ArriveDate AS currentArive, CurrentPort.ShipId, &#xA;                  CurrentPort.ArriveDate AS CurrentArrivalDate, NextPort.DepartDate AS NextDepartionDate, DATEDIFF(Day, CurrentPort.ArriveDate, NextPort.DepartDate) + 1 AS StayDays&#xA;FROM     dbo.F_ShipmentVoyage AS CurrentPort INNER JOIN&#xA;                  dbo.F_ShipmentVoyage AS NextPort ON CurrentPort.PortIdNext = NextPort.PortIdCurrent AND CurrentPort.VoyageId = NextPort.VoyageId AND CurrentPort.ShipId = NextPort.ShipId&#xA;GROUP BY CurrentPort.VoyageId, CurrentPort.PortIdCurrent, CurrentPort.DepartDate, CurrentPort.ArriveDate, NextPort.PortIdCurrent, NextPort.DepartDate, CurrentPort.ShipId" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
@@ -6038,6 +6615,22 @@ where [refTable].[Id] = ?</property>
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\D_Consignor" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{66C51F98-7EF8-45EB-A830-3F4C24E7E380}"
+      DTS:From="Package\F_Shipment"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\View StayDays" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 11]"
+      DTS:CreationName=""
+      DTS:DTSID="{97365A45-8E04-4D95-9234-DFD826EA9112}"
+      DTS:From="Package\View StayDays"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 11"
+      DTS:To="Package\F_ShipMeasures" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
@@ -6138,37 +6731,45 @@ where [refTable].[Id] = ?</property>
         <NodeLayout
           Size="163.2,41.6"
           Id="Package\Empty PSA Tables"
-          TopLeft="350.714286460864,0" />
+          TopLeft="352.857143608283,0.764705881682644" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\F_ShipMeasures"
+          TopLeft="513.571429664687,443.529411375935" />
         <NodeLayout
           Size="134.4,41.6"
           Id="Package\F_Shipment"
           TopLeft="357.485715039896,324.235293833442" />
+        <NodeLayout
+          Size="147.2,41.6"
+          Id="Package\View StayDays"
+          TopLeft="543.57142972855,328.058823241856" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="380.580953127531,41.6">
+          TopLeft="382.723810274949,42.3647058816826">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-242.352381525619,92.2235292944637"
+              EndConnector="-244.495238673038,91.4588234127814"
               Start="0,0"
-              End="-242.352381525619,84.7235292944637">
+              End="-244.495238673038,83.9588234127814">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.7106107200477" />
+                    End="0,20.5057134503146" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,20.7106107200477"
-                    Point2="0,24.7106107200477"
-                    Point3="-4,24.7106107200477" />
+                    Point1="0,20.5057134503146"
+                    Point2="0,24.5057134503146"
+                    Point3="-4,24.5057134503146" />
                   <mssgle:LineSegment
-                    End="-238.352381525619,24.7106107200477" />
+                    End="-240.495238673038,24.5057134503146" />
                   <mssgle:CubicBezierSegment
-                    Point1="-238.352381525619,24.7106107200477"
-                    Point2="-242.352381525619,24.7106107200477"
-                    Point3="-242.352381525619,28.7106107200477" />
+                    Point1="-240.495238673038,24.5057134503146"
+                    Point2="-244.495238673038,24.5057134503146"
+                    Point3="-244.495238673038,28.5057134503146" />
                   <mssgle:LineSegment
-                    End="-242.352381525619,84.7235292944637" />
+                    End="-244.495238673038,83.9588234127814" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6179,30 +6780,86 @@ where [refTable].[Id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="406.447619794198,41.6">
+          TopLeft="408.590476941616,42.3647058816826">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-121.533333620713,94.5176469395107"
+              EndConnector="-123.676190768131,93.7529410578283"
               Start="0,0"
-              End="-121.533333620713,87.0176469395107">
+              End="-123.676190768131,86.2529410578283">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,34.3576470104034" />
+                    End="0,34.0473100603614" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,34.3576470104034"
-                    Point2="0,38.3576470104034"
-                    Point3="-4,38.3576470104034" />
+                    Point1="0,34.0473100603614"
+                    Point2="0,38.0473100603614"
+                    Point3="-4,38.0473100603614" />
                   <mssgle:LineSegment
-                    End="-117.533333620713,38.3576470104034" />
+                    End="-119.676190768131,38.0473100603614" />
                   <mssgle:CubicBezierSegment
-                    Point1="-117.533333620713,38.3576470104034"
-                    Point2="-121.533333620713,38.3576470104034"
-                    Point3="-121.533333620713,42.3576470104034" />
+                    Point1="-119.676190768131,38.0473100603614"
+                    Point2="-123.676190768131,38.0473100603614"
+                    Point3="-123.676190768131,42.0473100603614" />
                   <mssgle:LineSegment
-                    End="-121.533333620713,87.0176469395107" />
+                    End="-123.676190768131,86.2529410578283" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="491.885715039896,346.947058537649">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="51.6857146886535,0"
+              Start="0,0"
+              End="44.1857146886535,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="44.1857146886535,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="617.17142972855,369.658823241856">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-26.400000063863,73.870588134079"
+              Start="0,0"
+              End="-26.400000063863,66.370588134079">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.9352940670395" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.9352940670395"
+                    Point2="0,36.9352940670395"
+                    Point3="-4,36.9352940670395" />
+                  <mssgle:LineSegment
+                    End="-22.400000063863,36.9352940670395" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.400000063863,36.9352940670395"
+                    Point2="-26.400000063863,36.9352940670395"
+                    Point3="-26.400000063863,40.9352940670395" />
+                  <mssgle:LineSegment
+                    End="-26.400000063863,66.370588134079" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6213,18 +6870,18 @@ where [refTable].[Id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="434.285715050539,41.6">
+          TopLeft="435.357143624248,42.3647058816826">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,95.2823528211937"
+              EndConnector="0,94.5176469395113"
               Start="0,0"
-              End="0,87.7823528211937">
+              End="0,87.0176469395113">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,87.7823528211937" />
+                    End="0,87.0176469395113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6235,30 +6892,30 @@ where [refTable].[Id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="458.180953127531,41.6">
+          TopLeft="460.323810274949,42.3647058816826">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="122.10476227425,91.4588234127807"
+              EndConnector="119.961905126832,90.6941175310984"
               Start="0,0"
-              End="122.10476227425,83.9588234127807">
+              End="119.961905126832,83.1941175310984">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.1162992102353" />
+                    End="0,32.8059622601933" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,33.1162992102353"
-                    Point2="0,37.1162992102353"
-                    Point3="4,37.1162992102353" />
+                    Point1="0,32.8059622601933"
+                    Point2="0,36.8059622601933"
+                    Point3="4,36.8059622601933" />
                   <mssgle:LineSegment
-                    End="118.10476227425,37.1162992102353" />
+                    End="115.961905126832,36.8059622601933" />
                   <mssgle:CubicBezierSegment
-                    Point1="118.10476227425,37.1162992102353"
-                    Point2="122.10476227425,37.1162992102353"
-                    Point3="122.10476227425,41.1162992102353" />
+                    Point1="115.961905126832,36.8059622601933"
+                    Point2="119.961905126832,36.8059622601933"
+                    Point3="119.961905126832,40.8059622601933" />
                   <mssgle:LineSegment
-                    End="122.10476227425,83.9588234127807" />
+                    End="119.961905126832,83.1941175310984" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6269,30 +6926,30 @@ where [refTable].[Id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="484.047619794198,41.6">
+          TopLeft="486.190476941616,42.3647058816826">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="228.295238747543,92.2235292944637"
+              EndConnector="226.152381600125,91.4588234127814"
               Start="0,0"
-              End="228.295238747543,84.7235292944637">
+              End="226.152381600125,83.9588234127814">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.7106107200477" />
+                    End="0,20.5057134503146" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,20.7106107200477"
-                    Point2="0,24.7106107200477"
-                    Point3="4,24.7106107200477" />
+                    Point1="0,20.5057134503146"
+                    Point2="0,24.5057134503146"
+                    Point3="4,24.5057134503146" />
                   <mssgle:LineSegment
-                    End="224.295238747543,24.7106107200477" />
+                    End="222.152381600125,24.5057134503146" />
                   <mssgle:CubicBezierSegment
-                    Point1="224.295238747543,24.7106107200477"
-                    Point2="228.295238747543,24.7106107200477"
-                    Point3="228.295238747543,28.7106107200477" />
+                    Point1="222.152381600125,24.5057134503146"
+                    Point2="226.152381600125,24.5057134503146"
+                    Point3="226.152381600125,28.5057134503146" />
                   <mssgle:LineSegment
-                    End="228.295238747543,84.7235292944637" />
+                    End="226.152381600125,83.9588234127814" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6848,6 +7505,82 @@ where [refTable].[Id] = ?</property>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\D_Ship\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\F_ShipMeasures">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\F_ShipMeasures\OLE DB Source"
+          TopLeft="274.285714869597,129.235294004367" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\F_ShipMeasures\OLE DB Destination"
+          TopLeft="290.000000617334,252.352940955273" />
+        <EdgeLayout
+          Id="Package\F_ShipMeasures.Paths[OLE DB Source Output]"
+          TopLeft="349.085714869597,170.835294004367">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="26.1142857477373,81.5176469509061"
+              Start="0,0"
+              End="26.1142857477373,74.0176469509061">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.7588234754531" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.7588234754531"
+                    Point2="0,40.7588234754531"
+                    Point3="4,40.7588234754531" />
+                  <mssgle:LineSegment
+                    End="22.1142857477373,40.7588234754531" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.1142857477373,40.7588234754531"
+                    Point2="26.1142857477373,40.7588234754531"
+                    Point3="26.1142857477373,44.7588234754531" />
+                  <mssgle:LineSegment
+                    End="26.1142857477373,74.0176469509061" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\F_ShipMeasures\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\F_ShipMeasures\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

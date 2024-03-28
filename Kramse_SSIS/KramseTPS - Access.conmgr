@@ -7,6 +7,6 @@
     <DTS:ConnectionManager
       DTS:ConnectRetryCount="1"
       DTS:ConnectRetryInterval="5"
-      DTS:ConnectionString="Data Source=C:\Users\VossB\source\repos\Kramse_SSIS\sources\KramseTPS.mdb;Provider=Microsoft.ACE.OLEDB.16.0;" />
+      DTS:ConnectionString="Data Source=C:\Users\VossB\source\repos\Kramse_SSIS\sources\KramseTPS (1).mdb;Provider=Microsoft.ACE.OLEDB.16.0;" />
   </DTS:ObjectData>
 </DTS:ConnectionManager>
