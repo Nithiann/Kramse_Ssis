@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/sources/beladingsgraad.txt
+/sources/Consignor (2).xlsx
+/sources
