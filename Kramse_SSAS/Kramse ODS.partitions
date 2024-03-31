@@ -1,37 +1,17 @@
-﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="6e7a7223-7e78-4721-91b7-e0988defda98" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="6e35c9d5-9f10-4e67-9526-da3c31fa1f48" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
   <ID>Kramse ODS</ID>
   <MeasureGroups>
     <MeasureGroup>
-      <ID>F Ship Measures</ID>
-      <Partitions>
-        <Partition dwd:design-time-name="dcabae43-26d4-48e3-8170-6a1f4d2ec337">
-          <ID>F Ship Measures</ID>
-          <Name>F Ship Measures</Name>
-          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
-          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
-          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
-          <State>Unprocessed</State>
-          <Source xsi:type="DsvTableBinding" dwd:design-time-name="3a730603-3a40-45a4-bf2a-154f94542819">
-            <DataSourceViewID>Kramse ODS</DataSourceViewID>
-            <TableID>dbo_F_ShipMeasures</TableID>
-          </Source>
-          <StorageMode>Molap</StorageMode>
-          <CurrentStorageMode>Molap</CurrentStorageMode>
-          <ProcessingMode>Regular</ProcessingMode>
-        </Partition>
-      </Partitions>
-    </MeasureGroup>
-    <MeasureGroup>
       <ID>F Shipment Voyage</ID>
       <Partitions>
-        <Partition dwd:design-time-name="f79fd536-5fab-43a7-9186-dd23c8c09d37">
+        <Partition dwd:design-time-name="c91894c7-1e55-4a84-917d-28c6804bd2d9">
           <ID>F Shipment Voyage</ID>
           <Name>F Shipment Voyage</Name>
           <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
           <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
           <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
           <State>Unprocessed</State>
-          <Source xsi:type="DsvTableBinding" dwd:design-time-name="e6cc709c-1513-4df5-b9cf-5e8dda8c6a73">
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="c69a0ee6-d233-4a4b-84b5-347469b57498">
             <DataSourceViewID>Kramse ODS</DataSourceViewID>
             <TableID>dbo_F_ShipmentVoyage</TableID>
           </Source>
@@ -44,16 +24,36 @@
     <MeasureGroup>
       <ID>F Stay Days</ID>
       <Partitions>
-        <Partition dwd:design-time-name="d039d85d-fb40-4f9d-b0c4-79dd36b1023a">
+        <Partition dwd:design-time-name="52743813-78b1-4dba-8cf6-ae9113f7ba03">
           <ID>F Stay Days</ID>
           <Name>F Stay Days</Name>
           <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
           <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
           <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
           <State>Unprocessed</State>
-          <Source xsi:type="DsvTableBinding" dwd:design-time-name="7711ee71-5924-47bd-8a62-20cc718ba98d">
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="37292afb-c483-4107-8512-078d3048d91e">
             <DataSourceViewID>Kramse ODS</DataSourceViewID>
             <TableID>dbo_F_StayDays</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>F Ship Measures</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="20fa8ab8-9a87-4f94-a4ef-a6b740ec86e5">
+          <ID>F Ship Measures</ID>
+          <Name>F Ship Measures</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="4098cc93-d7e6-4394-ac74-779da67b83ee">
+            <DataSourceViewID>Kramse ODS</DataSourceViewID>
+            <TableID>dbo_F_ShipMeasures</TableID>
           </Source>
           <StorageMode>Molap</StorageMode>
           <CurrentStorageMode>Molap</CurrentStorageMode>
