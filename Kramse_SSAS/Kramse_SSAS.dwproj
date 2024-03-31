@@ -24,16 +24,12 @@
       <FullPath>D Time.dim</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>D Ship 5.dim</Name>
-      <FullPath>D Ship 5.dim</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>D Container 4.dim</Name>
-      <FullPath>D Container 4.dim</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>D Port 5.dim</Name>
       <FullPath>D Port 5.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>D Ship 5.dim</Name>
+      <FullPath>D Ship 5.dim</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>D Consignor 5.dim</Name>
@@ -42,6 +38,10 @@
     <ProjectItem>
       <Name>D Item 5.dim</Name>
       <FullPath>D Item 5.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>D Container 4.dim</Name>
+      <FullPath>D Container 4.dim</FullPath>
     </ProjectItem>
   </Dimensions>
   <DataSources>
