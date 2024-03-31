@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="4  PSA to ODS"
   DTS:PackageType="5"
-  DTS:VersionBuild="41"
-  DTS:VersionGUID="{0036182C-9607-4035-9A4A-D56A91E0AFE9}">
+  DTS:VersionBuild="43"
+  DTS:VersionGUID="{F9674F82-0400-4EBA-A9C5-3A065BAD4C87}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -4707,6 +4707,12 @@
                       cachedName="Start_Date"
                       externalMetadataColumnId="Package\D_Ship\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Start_Date]"
                       lineageId="Package\D_Ship\Derived Column 1.Outputs[Derived Column Output].Columns[Start_Date]" />
+                    <inputColumn
+                      refId="Package\D_Ship\Insert Destination.Inputs[OLE DB Destination Input].Columns[Sh_Yearcost]"
+                      cachedDataType="cy"
+                      cachedName="Sh_Yearcost"
+                      externalMetadataColumnId="Package\D_Ship\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Yearcost]"
+                      lineageId="Package\D_Ship\Union All.Outputs[Union All Output 1].Columns[Sh_Yearcost]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -7834,6 +7840,12 @@ where [refTable].[ShipId] = ?</property>
                       cachedName="ShipRowId"
                       externalMetadataColumnId="Package\F_ShipmentVoyage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShipRowId]"
                       lineageId="Package\F_ShipmentVoyage\Lookup Ship.Outputs[Lookup Match Output].Columns[ShipRowId]" />
+                    <inputColumn
+                      refId="Package\F_ShipmentVoyage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RevenueEuro]"
+                      cachedDataType="r8"
+                      cachedName="RevenueEuro"
+                      externalMetadataColumnId="Package\F_ShipmentVoyage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RevenueEuro]"
+                      lineageId="Package\F_ShipmentVoyage\OLE DB Source.Outputs[OLE DB Source Output].Columns[RevenueEuro]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -7892,6 +7904,10 @@ where [refTable].[ShipId] = ?</property>
                       name="LoadFactor"
                       precision="18"
                       scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipmentVoyage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RevenueEuro]"
+                      dataType="r8"
+                      name="RevenueEuro" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -8101,6 +8117,15 @@ where [refTable].[ShipId] = ?</property>
                       precision="18"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\F_ShipmentVoyage\OLE DB Source.Outputs[OLE DB Source Output].Columns[RevenueEuro]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\F_ShipmentVoyage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RevenueEuro]"
+                      lineageId="Package\F_ShipmentVoyage\OLE DB Source.Outputs[OLE DB Source Output].Columns[RevenueEuro]"
+                      name="RevenueEuro"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -8159,6 +8184,10 @@ where [refTable].[ShipId] = ?</property>
                       name="LoadFactor"
                       precision="18"
                       scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\F_ShipmentVoyage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RevenueEuro]"
+                      dataType="r8"
+                      name="RevenueEuro" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -8234,6 +8263,11 @@ where [refTable].[ShipId] = ?</property>
                       name="LoadFactor"
                       precision="18"
                       scale="2" />
+                    <outputColumn
+                      refId="Package\F_ShipmentVoyage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RevenueEuro]"
+                      dataType="r8"
+                      lineageId="Package\F_ShipmentVoyage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RevenueEuro]"
+                      name="RevenueEuro" />
                     <outputColumn
                       refId="Package\F_ShipmentVoyage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -10708,9 +10742,7 @@ where [refTable].[ShipId] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -10732,9 +10764,7 @@ where [refTable].[ShipId] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -10756,9 +10786,7 @@ where [refTable].[ShipId] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -10780,9 +10808,7 @@ where [refTable].[ShipId] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -10816,9 +10842,7 @@ where [refTable].[ShipId] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -10974,6 +10998,19 @@ where [refTable].[ShipId] = ?</property>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\D_Ship\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\D_Ship\Insert Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

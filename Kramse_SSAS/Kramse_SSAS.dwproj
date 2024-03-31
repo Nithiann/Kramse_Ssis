@@ -20,20 +20,16 @@
   </Cubes>
   <Dimensions>
     <ProjectItem>
+      <Name>D Time.dim</Name>
+      <FullPath>D Time.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>D Ship 4.dim</Name>
       <FullPath>D Ship 4.dim</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>D Container 3.dim</Name>
-      <FullPath>D Container 3.dim</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>D Port 4.dim</Name>
       <FullPath>D Port 4.dim</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>D Time.dim</Name>
-      <FullPath>D Time.dim</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>D Consignor 4.dim</Name>
@@ -42,6 +38,10 @@
     <ProjectItem>
       <Name>D Item 4.dim</Name>
       <FullPath>D Item 4.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>D Container 3.dim</Name>
+      <FullPath>D Container 3.dim</FullPath>
     </ProjectItem>
   </Dimensions>
   <DataSources>

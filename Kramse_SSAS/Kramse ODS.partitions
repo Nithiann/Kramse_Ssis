@@ -1,17 +1,17 @@
-﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="7379c400-b428-4858-a0dd-25569aef0cb8" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="6e7a7223-7e78-4721-91b7-e0988defda98" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
   <ID>Kramse ODS</ID>
   <MeasureGroups>
     <MeasureGroup>
       <ID>F Ship Measures</ID>
       <Partitions>
-        <Partition dwd:design-time-name="99262631-adbb-4a86-8275-d0efa24f552a">
+        <Partition dwd:design-time-name="dcabae43-26d4-48e3-8170-6a1f4d2ec337">
           <ID>F Ship Measures</ID>
           <Name>F Ship Measures</Name>
           <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
           <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
           <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
           <State>Unprocessed</State>
-          <Source xsi:type="DsvTableBinding" dwd:design-time-name="ab1d1138-20ec-41f6-98d1-4e3cc79bb54a">
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="3a730603-3a40-45a4-bf2a-154f94542819">
             <DataSourceViewID>Kramse ODS</DataSourceViewID>
             <TableID>dbo_F_ShipMeasures</TableID>
           </Source>
@@ -22,18 +22,18 @@
       </Partitions>
     </MeasureGroup>
     <MeasureGroup>
-      <ID>F Stay Days</ID>
+      <ID>F Shipment Voyage</ID>
       <Partitions>
-        <Partition dwd:design-time-name="9a182227-4305-4fef-8a1d-a86bbedb05ba">
-          <ID>F Stay Days</ID>
-          <Name>F Stay Days</Name>
+        <Partition dwd:design-time-name="f79fd536-5fab-43a7-9186-dd23c8c09d37">
+          <ID>F Shipment Voyage</ID>
+          <Name>F Shipment Voyage</Name>
           <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
           <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
           <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
           <State>Unprocessed</State>
-          <Source xsi:type="DsvTableBinding" dwd:design-time-name="5645db65-19ec-4172-af0c-803377a49a3a">
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="e6cc709c-1513-4df5-b9cf-5e8dda8c6a73">
             <DataSourceViewID>Kramse ODS</DataSourceViewID>
-            <TableID>dbo_F_StayDays</TableID>
+            <TableID>dbo_F_ShipmentVoyage</TableID>
           </Source>
           <StorageMode>Molap</StorageMode>
           <CurrentStorageMode>Molap</CurrentStorageMode>
@@ -42,18 +42,18 @@
       </Partitions>
     </MeasureGroup>
     <MeasureGroup>
-      <ID>F Shipment Voyage</ID>
+      <ID>F Stay Days</ID>
       <Partitions>
-        <Partition dwd:design-time-name="8c36f372-53c8-4a50-92c0-bc2306b8730a">
-          <ID>F Shipment Voyage</ID>
-          <Name>F Shipment Voyage</Name>
+        <Partition dwd:design-time-name="d039d85d-fb40-4f9d-b0c4-79dd36b1023a">
+          <ID>F Stay Days</ID>
+          <Name>F Stay Days</Name>
           <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
           <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
           <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
           <State>Unprocessed</State>
-          <Source xsi:type="DsvTableBinding" dwd:design-time-name="89aa9062-861a-4337-a279-06316eca57be">
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="7711ee71-5924-47bd-8a62-20cc718ba98d">
             <DataSourceViewID>Kramse ODS</DataSourceViewID>
-            <TableID>dbo_F_ShipmentVoyage</TableID>
+            <TableID>dbo_F_StayDays</TableID>
           </Source>
           <StorageMode>Molap</StorageMode>
           <CurrentStorageMode>Molap</CurrentStorageMode>

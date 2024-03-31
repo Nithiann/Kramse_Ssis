@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="2  Raw to ERP"
   DTS:PackageType="5"
-  DTS:VersionBuild="124"
-  DTS:VersionGUID="{EC0D6355-C333-4DD0-90B8-DC5ECC5CED68}">
+  DTS:VersionBuild="129"
+  DTS:VersionGUID="{657BEFD1-D047-4D71-A389-27CA7A0D98F8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -48,6 +48,85 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\Load Consignor\Calculate DiscountFactor"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Calculate DiscountFactor"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Consignor\Calculate DiscountFactor.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Consignor\Calculate DiscountFactor.Inputs[Derived Column Input].Columns[Discount]"
+                      cachedDataType="r8"
+                      cachedName="Discount"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Discount]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">1 - (#{Package\Load Consignor\Change Discount from NULL to 0.Outputs[Derived Column Output].Columns[Discount_New]} / 100)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">1 - (Discount_New / 100)</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load Consignor\Calculate DiscountFactor.Inputs[Derived Column Input].Columns[Discount_New]"
+                      cachedDataType="r8"
+                      cachedName="Discount_New"
+                      lineageId="Package\Load Consignor\Change Discount from NULL to 0.Outputs[Derived Column Output].Columns[Discount_New]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Consignor\Calculate DiscountFactor.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load Consignor\Calculate DiscountFactor.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Consignor\Calculate DiscountFactor.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load Consignor\Calculate DiscountFactor.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Consignor\Calculate DiscountFactor.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Consignor\Calculate DiscountFactor.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Consignor\Calculate DiscountFactor.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Consignor\Calculate DiscountFactor.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\Load Consignor\Change Discount from NULL to 0"
               componentClassID="Microsoft.DerivedColumn"
@@ -557,18 +636,18 @@ where [refTable].[Country] = ?</property>
                       externalMetadataColumnId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
                       lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]" />
                     <inputColumn
-                      refId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Discount_New]"
-                      cachedDataType="r8"
-                      cachedName="Discount_New"
-                      externalMetadataColumnId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
-                      lineageId="Package\Load Consignor\Change Discount from NULL to 0.Outputs[Derived Column Output].Columns[Discount_New]" />
-                    <inputColumn
                       refId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ISO3]"
                       cachedDataType="wstr"
                       cachedLength="10"
                       cachedName="ISO3"
                       externalMetadataColumnId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
                       lineageId="Package\Load Consignor\Lookup Correct Country Codes.Outputs[Lookup Match Output].Columns[ISO3]" />
+                    <inputColumn
+                      refId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Discount]"
+                      cachedDataType="r8"
+                      cachedName="Discount"
+                      externalMetadataColumnId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
+                      lineageId="Package\Load Consignor\OLE DB Source.Outputs[OLE DB Source Output].Columns[Discount]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -593,7 +672,7 @@ where [refTable].[Country] = ?</property>
                       name="Country" />
                     <externalMetadataColumn
                       refId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
-                      dataType="i4"
+                      dataType="r8"
                       name="Discount" />
                   </externalMetadataColumns>
                 </input>
@@ -819,9 +898,14 @@ where [refTable].[Country] = ?</property>
               startId="Package\Load Consignor\Convert Unicode to non-unicode.Outputs[Data Conversion Output]" />
             <path
               refId="Package\Load Consignor.Paths[Derived Column Output]"
-              endId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              endId="Package\Load Consignor\Calculate DiscountFactor.Inputs[Derived Column Input]"
               name="Derived Column Output"
               startId="Package\Load Consignor\Change Discount from NULL to 0.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load Consignor.Paths[Derived Column Output1]"
+              endId="Package\Load Consignor\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Load Consignor\Calculate DiscountFactor.Outputs[Derived Column Output]" />
             <path
               refId="Package\Load Consignor.Paths[Lookup Match Output]"
               endId="Package\Load Consignor\Change Discount from NULL to 0.Inputs[Derived Column Input]"
@@ -6777,18 +6861,6 @@ where [refTable].[Name] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="229.6,41.6"
-          Id="Package\Load Consignor\Convert Unicode to non-unicode"
-          TopLeft="560.999991640449,148.999997779727" />
-        <NodeLayout
-          Size="170.4,41.6"
-          Id="Package\Load Consignor\OLE DB Destination"
-          TopLeft="232.999998656767,376.588230293824" />
-        <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\Load Consignor\OLE DB Source"
-          TopLeft="237.857139191154,46.0588216097401" />
-        <NodeLayout
           Size="200.8,41.6"
           Id="Package\Load Consignor\Log Invalid Country Name"
           TopLeft="854.999987259507,147.999997794628" />
@@ -6800,50 +6872,22 @@ where [refTable].[Name] = ?</property>
           Size="221.6,41.6"
           Id="Package\Load Consignor\Lookup Correct Country Codes"
           TopLeft="205.714286152198,141.19999988605" />
-        <EdgeLayout
-          Id="Package\Load Consignor.Paths[Derived Column Output]"
-          TopLeft="318.871428150091,306.729412652176">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,69.8588176416489"
-              Start="0,0"
-              End="0,62.3588176416489">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,62.3588176416489" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Consignor.Paths[Data Conversion Output]"
-          TopLeft="790.599991640449,169.299997787178">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="64.3999956190586,0"
-              Start="0,0"
-              End="56.8999956190586,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="56.8999956190586,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="229.6,41.6"
+          Id="Package\Load Consignor\Convert Unicode to non-unicode"
+          TopLeft="560.999991640449,148.999997779727" />
+        <NodeLayout
+          Size="194.4,41.6"
+          Id="Package\Load Consignor\Calculate DiscountFactor"
+          TopLeft="229.285714773804,333.411764413634" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Load Consignor\OLE DB Source"
+          TopLeft="237.857139191154,46.0588216097401" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Load Consignor\OLE DB Destination"
+          TopLeft="231.571427225154,438.529406710119" />
         <EdgeLayout
           Id="Package\Load Consignor.Paths[OLE DB Source Output]"
           TopLeft="314.585712671676,87.6588216097401">
@@ -6914,35 +6958,87 @@ where [refTable].[Name] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Consignor.Paths[Derived Column Output1]"
+          TopLeft="326.485714773804,375.011764413634">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.71428754864905,63.5176422964844"
+              Start="0,0"
+              End="-9.71428754864905,56.0176422964844">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.7588211482422" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.7588211482422"
+                    Point2="0,31.7588211482422"
+                    Point3="-4,31.7588211482422" />
+                  <mssgle:LineSegment
+                    End="-5.71428754864905,31.7588211482422" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.71428754864905,31.7588211482422"
+                    Point2="-9.71428754864905,31.7588211482422"
+                    Point3="-9.71428754864905,35.7588211482422" />
+                  <mssgle:LineSegment
+                    End="-9.71428754864905,56.0176422964844" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Consignor.Paths[Derived Column Output]"
+          TopLeft="323.014286208609,306.729412652176">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.6823517614581"
+              Start="0,0"
+              End="0,19.1823517614581">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.1823517614581" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Consignor.Paths[Data Conversion Output]"
+          TopLeft="790.599991640449,169.299997787178">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="64.3999956190586,0"
+              Start="0,0"
+              End="56.8999956190586,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="56.8999956190586,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Consignor\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Consignor\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Load Consignor\Lookup Correct Country Codes">
     <Properties>
@@ -6966,6 +7062,32 @@ where [refTable].[Name] = ?</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Consignor\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Consignor\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Load Container">
     <LayoutInfo>
@@ -6978,7 +7100,7 @@ where [refTable].[Name] = ?</property>
         <NodeLayout
           Size="155.2,41.6"
           Id="Package\Load Container\Data Conversion"
-          TopLeft="233.714286160712,178.352943022153" />
+          TopLeft="236.714286116009,177.352943037054" />
         <NodeLayout
           Size="177.6,41.6"
           Id="Package\Load Container\Remove empty Rows"
@@ -7026,7 +7148,9 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -7060,7 +7184,9 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -7082,64 +7208,56 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Container.Paths[Data Conversion Output]"
-          TopLeft="311.057141277316,219.952943022153">
+          TopLeft="312.557141254964,218.952943037054">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,36.0470531631499"
+              EndConnector="0,37.0470531482488"
               Start="0,0"
-              End="0,28.5470531631499">
+              End="0,29.5470531482488">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.5470531631499" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Container.Paths[Conditional Split Default Output]"
-          TopLeft="320.371429183593,132.894119653199">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-9.05714302288067,45.458823368954"
-              Start="0,0"
-              End="-9.05714302288067,37.958823368954">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.729411684477" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,18.729411684477"
-                    Point2="0,22.729411684477"
-                    Point3="-4,22.729411684477" />
-                  <mssgle:LineSegment
-                    End="-5.05714302288067,22.729411684477" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-5.05714302288067,22.729411684477"
-                    Point2="-9.05714302288067,22.729411684477"
-                    Point3="-9.05714302288067,26.729411684477" />
-                  <mssgle:LineSegment
-                    End="-9.05714302288067,37.958823368954" />
+                    End="0,29.5470531482488" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-75.1424777614403,27.729411684477,141.2278125,11.658203125"
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Container.Paths[Conditional Split Default Output]"
+          TopLeft="317.342857649801,132.894119653199">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.4588233838556"
+              Start="0,0"
+              End="0,36.9588233838556">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.9588233838556" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-70.61390625,12.6503101294278,141.2278125,11.658203125"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -7176,7 +7294,7 @@ where [refTable].[Name] = ?</property>
     design-time-name="Package\Load Item">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Load Item\OLE DB Source"
@@ -7216,7 +7334,9 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -7308,7 +7428,9 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -7402,7 +7524,9 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -7424,7 +7548,9 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -7485,9 +7611,9 @@ where [refTable].[Name] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\Load Ship\OLE DB Source"
-          TopLeft="257.142857945695,21.5882359483766" />
+          Size="202.4,41.6"
+          Id="Package\Load Ship\ReportYear to DateFormat"
+          TopLeft="232.999996528029,344.999994859099" />
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\Load Ship\OLE DB Destination"
@@ -7497,13 +7623,13 @@ where [refTable].[Name] = ?</property>
           Id="Package\Load Ship\Convert unicode to non-unicode"
           TopLeft="555.999991714954,98.999998524785" />
         <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Load Ship\OLE DB Source"
+          TopLeft="257.142857945695,21.5882359483766" />
+        <NodeLayout
           Size="181.6,41.6"
           Id="Package\Load Ship\lookup Ship MRV data"
           TopLeft="248.999996289611,178.999997332692" />
-        <NodeLayout
-          Size="202.4,41.6"
-          Id="Package\Load Ship\ReportYear to DateFormat"
-          TopLeft="232.999996528029,344.999994859099" />
         <NodeLayout
           Size="168.8,41.6"
           Id="Package\Load Ship\Log Invalid country"
@@ -7516,50 +7642,6 @@ where [refTable].[Name] = ?</property>
           Size="173.6,41.6"
           Id="Package\Load Ship\Lookup Country ISO"
           TopLeft="248.999996289611,99.9999985098839" />
-        <EdgeLayout
-          Id="Package\Load Ship.Paths[Derived Column Output]"
-          TopLeft="333.199996602535,294.599996230006">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,50.3999986290934"
-              Start="0,0"
-              End="0,42.8999986290934">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,42.8999986290934" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Ship.Paths[Data Conversion Output]"
-          TopLeft="784.799991714954,119.299998532236">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="69.1999955594538,0"
-              Start="0,0"
-              End="61.6999955594538,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="61.6999955594538,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Ship.Paths[OLE DB Source Output]"
           TopLeft="333.871427117653,63.1882359483766">
@@ -7579,7 +7661,9 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -7673,14 +7757,64 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Ship.Paths[Derived Column Output]"
+          TopLeft="333.199996602535,294.599996230006">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.3999986290934"
+              Start="0,0"
+              End="0,42.8999986290934">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.8999986290934" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Ship.Paths[Data Conversion Output]"
+          TopLeft="784.799991714954,119.299998532236">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="69.1999955594538,0"
+              Start="0,0"
+              End="61.6999955594538,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="61.6999955594538,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Ship\OLE DB Source">
+    design-time-name="Package\Load Ship\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -7693,7 +7827,7 @@ where [refTable].[Name] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Ship\OLE DB Destination">
+    design-time-name="Package\Load Ship\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -7755,7 +7889,7 @@ where [refTable].[Name] = ?</property>
     design-time-name="Package\Load Shipment">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\Load Shipment\OLE DB Destination"
@@ -7799,7 +7933,9 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -7833,7 +7969,9 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -7869,15 +8007,15 @@ where [refTable].[Name] = ?</property>
     design-time-name="Package\Load ShipmentDetails">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\Load ShipmentDetails\OLE DB Destination"
-          TopLeft="303.71427847597,257.470584741874" />
+          TopLeft="236.714279474348,273.470584503455" />
         <NodeLayout
           Size="260.8,41.6"
           Id="Package\Load ShipmentDetails\Change containerNr to ContainerCount"
-          TopLeft="447.857143810513,155.99999986326" />
+          TopLeft="179.857147804024,158.999999818557" />
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Load ShipmentDetails\OLE DB Source"
@@ -7888,66 +8026,70 @@ where [refTable].[Name] = ?</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="281.028578907738,92.6352952061022"
+              EndConnector="13.0285829012491,95.6352951613987"
               Start="0,0"
-              End="281.028578907738,85.1352952061022">
+              End="13.0285829012491,88.1352951613987">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,42.3176476030511" />
+                    End="0,43.8176475806994" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,42.3176476030511"
-                    Point2="0,46.3176476030511"
-                    Point3="4,46.3176476030511" />
+                    Point1="0,43.8176475806994"
+                    Point2="0,47.8176475806994"
+                    Point3="4,47.8176475806994" />
                   <mssgle:LineSegment
-                    End="277.028578907738,46.3176476030511" />
+                    End="9.02858290124914,47.8176475806994" />
                   <mssgle:CubicBezierSegment
-                    Point1="277.028578907738,46.3176476030511"
-                    Point2="281.028578907738,46.3176476030511"
-                    Point3="281.028578907738,50.3176476030511" />
+                    Point1="9.02858290124914,47.8176475806994"
+                    Point2="13.0285829012491,47.8176475806994"
+                    Point3="13.0285829012491,51.8176475806994" />
                   <mssgle:LineSegment
-                    End="281.028578907738,85.1352952061022" />
+                    End="13.0285829012491,88.1352951613987" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load ShipmentDetails.Paths[Derived Column Output]"
-          TopLeft="578.257143810513,197.59999986326">
+          TopLeft="310.257147804024,200.599999818557">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-189.342865334543,59.8705848786136"
+              EndConnector="11.6571316703236,72.8705846848989"
               Start="0,0"
-              End="-189.342865334543,52.3705848786136">
+              End="11.6571316703236,65.3705846848989">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25.9352924393068" />
+                    End="0,32.4352923424494" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,25.9352924393068"
-                    Point2="0,29.9352924393068"
-                    Point3="-4,29.9352924393068" />
+                    Point1="0,32.4352923424494"
+                    Point2="0,36.4352923424494"
+                    Point3="4,36.4352923424494" />
                   <mssgle:LineSegment
-                    End="-185.342865334543,29.9352924393068" />
+                    End="7.65713167032362,36.4352923424494" />
                   <mssgle:CubicBezierSegment
-                    Point1="-185.342865334543,29.9352924393068"
-                    Point2="-189.342865334543,29.9352924393068"
-                    Point3="-189.342865334543,33.9352924393068" />
+                    Point1="7.65713167032362,36.4352923424494"
+                    Point2="11.6571316703236,36.4352923424494"
+                    Point3="11.6571316703236,40.4352923424494" />
                   <mssgle:LineSegment
-                    End="-189.342865334543,52.3705848786136" />
+                    End="11.6571316703236,65.3705846848989" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -7983,7 +8125,7 @@ where [refTable].[Name] = ?</property>
     design-time-name="Package\Load Voyage">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\Load Voyage\OLE DB Destination"
@@ -8023,7 +8165,9 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -8059,7 +8203,7 @@ where [refTable].[Name] = ?</property>
     design-time-name="Package\Load VoyagePort">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\Load VoyagePort\OLE DB Destination"
@@ -8103,7 +8247,9 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -8137,7 +8283,9 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

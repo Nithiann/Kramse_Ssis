@@ -1,4 +1,4 @@
-﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="83b06efe-ba56-4690-94f3-42b6209d6ad2" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="bce621c7-f704-4d02-97c5-f10493c994e8" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
   <ID>D Ship</ID>
   <Name>D Ship</Name>
   <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
@@ -6,6 +6,32 @@
   <Annotations>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="2" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-3613" scrolltop="-8604" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="10266" y="22035" backcolor="2039583" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="010000009001b0300100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="D_Ship" left="20" top="0" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="3000" height="4826" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000b80b0000da120000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_D_Ship" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+        </dds>
+      </Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
@@ -21,15 +47,15 @@
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
-      <Value>0</Value>
+      <Value>-3613</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
-      <Value>0</Value>
+      <Value>-8604</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
-      <Value>0</Value>
+      <Value>20</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
@@ -42,67 +68,67 @@
   </Annotations>
   <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
   <State>Unprocessed</State>
-  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="5137fa48-2a75-410e-8ed4-fc043a47f98f">
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="8c43d6c5-847d-44b3-b9bf-37b2f58d2749">
     <DataSourceViewID>Kramse ODS</DataSourceViewID>
   </Source>
-  <ErrorConfiguration dwd:design-time-name="9eaf8d4e-6a1f-42e7-ab7f-4ae92dcc1693">
+  <ErrorConfiguration dwd:design-time-name="62e460ec-9590-41dc-96c1-fdd83f52c478">
     <KeyNotFound>ReportAndStop</KeyNotFound>
     <KeyDuplicate>ReportAndStop</KeyDuplicate>
     <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
   </ErrorConfiguration>
   <CurrentStorageMode>Molap</CurrentStorageMode>
   <Attributes>
-    <Attribute dwd:design-time-name="cdd7a801-5927-44c1-9303-86a192ac8af7">
+    <Attribute dwd:design-time-name="0e2bb203-e029-4734-bce9-657c1149a515">
       <ID>Ship Row Id</ID>
       <Name>Ship Row Id</Name>
       <Usage>Key</Usage>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="5a7536d9-aceb-42f1-b47c-8fd7ffb9a367">
+        <KeyColumn dwd:design-time-name="d1ff6e81-b6eb-45ce-a4ae-665f49d0e3d8">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="864f3423-803a-4c65-b84e-46fea92f6ed0">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="29258046-e7d9-4649-bb11-68e1365b912e">
             <TableID>dbo_D_Ship</TableID>
             <ColumnID>ShipRowId</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
       <AttributeRelationships>
-        <AttributeRelationship dwd:design-time-name="530d1ca0-3f81-45e2-950c-260306347dde">
+        <AttributeRelationship dwd:design-time-name="5a8f0483-1c27-4b83-8864-1aa29fcbe57d">
           <AttributeID>Ship Id</AttributeID>
           <Name>Ship Id</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="d286e9c3-ea4a-497b-865a-6cff457a997f">
+        <AttributeRelationship dwd:design-time-name="e0151d95-5ae0-4144-9a1f-b8854aab4cd5">
           <AttributeID>Shipname</AttributeID>
           <Name>Shipname</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="5087272e-28d8-4c7f-b7e6-7387f05cdc7c">
+        <AttributeRelationship dwd:design-time-name="ac7ec91a-18bc-485a-86f7-7fa8c75539f6">
           <AttributeID>Max TEU</AttributeID>
           <Name>Max TEU</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="3a1e3894-63ef-4362-b9a4-89ccd3e59afb">
+        <AttributeRelationship dwd:design-time-name="1967a190-02bc-4dbd-ae78-625025b6b97f">
           <AttributeID>Speed In Knots</AttributeID>
           <Name>Speed In Knots</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="9ae864d4-9a8f-455b-bfe5-a82458271a88">
+        <AttributeRelationship dwd:design-time-name="9adefa5a-a7b2-4353-9322-d5e2bceaa03d">
           <AttributeID>Speed In Km H</AttributeID>
           <Name>Speed In Km H</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="41392afc-7ff0-41d1-b3c9-3d7cb601e6ac">
+        <AttributeRelationship dwd:design-time-name="55bd2032-b6d6-4625-a5fe-e012eb1c03ed">
           <AttributeID>Country</AttributeID>
           <Name>Country</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="fb18f577-b3e6-4bd7-8174-5240d407d5cc">
+        <AttributeRelationship dwd:design-time-name="869fbc14-fb11-4f8c-8b24-722eefe06556">
           <AttributeID>Yearcost</AttributeID>
           <Name>Yearcost</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="3c3c1011-50f0-4c77-8ee2-b456aa65c4a5">
+        <AttributeRelationship dwd:design-time-name="8d7f91cd-af21-4f3e-9a3a-8c81f41ff2bc">
           <AttributeID>Length</AttributeID>
           <Name>Length</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="7df2634b-bcb9-4902-920d-26792acf2f41">
+        <AttributeRelationship dwd:design-time-name="17177428-0427-47e0-ae39-1a198b864cf3">
           <AttributeID>Start Date</AttributeID>
           <Name>Start Date</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="34fc60fe-df6e-41c7-9b5e-bf062eeaeacb">
+        <AttributeRelationship dwd:design-time-name="9f916e74-2468-4b80-91d2-2baf44ae13ad">
           <AttributeID>End Date</AttributeID>
           <Name>End Date</Name>
         </AttributeRelationship>
@@ -111,165 +137,155 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="86d648fa-da41-4c06-a8ed-0059640ecc41">
+    <Attribute dwd:design-time-name="6b77fb6c-64c6-4062-af9f-b6372f686714">
       <ID>Ship Id</ID>
       <Name>Ship Id</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="4a3486fa-f3c2-44c7-9f06-0e26fcf80f5b">
+        <KeyColumn dwd:design-time-name="6a4e343a-9f4e-4212-b62d-1c7e81cca57a">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="6fc0d971-6567-42c5-a335-480100d579d8">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="8977d77b-7d71-4606-99f5-ef1ce858fd2a">
             <TableID>dbo_D_Ship</TableID>
             <ColumnID>ShipId</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
-      <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="55235c8b-2633-4315-9024-d2d338fb1bb4">
+    <Attribute dwd:design-time-name="cd3b2778-90c3-4feb-a313-6f923bf36a30">
       <ID>Shipname</ID>
       <Name>Shipname</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="7f709c52-484e-4e73-9109-238bbb93a18b">
+        <KeyColumn dwd:design-time-name="4d312a6c-5786-40f3-8b3c-7e10bcf1592e">
           <DataType>WChar</DataType>
           <DataSize>50</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="d096316c-4950-4dc2-a9a7-752fc5db1c4a">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="18c78805-d115-4c78-97cf-175cc8f03689">
             <TableID>dbo_D_Ship</TableID>
             <ColumnID>Shipname</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
-      <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="8909a2ef-526c-4de9-84c2-f76fce44b344">
+    <Attribute dwd:design-time-name="3cd58c9f-fffe-406e-842e-072d3c748f37">
       <ID>Max TEU</ID>
       <Name>Max TEU</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="a61fb1b5-cb11-48be-bd91-e1eb96c75a62">
+        <KeyColumn dwd:design-time-name="ea84afc2-a198-4812-abcd-938f0dca1ecb">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="d33dc170-ff84-41af-bf88-cf2a72292a55">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="dd3b0b45-1a4f-495b-81b1-25010e02eb99">
             <TableID>dbo_D_Ship</TableID>
             <ColumnID>MaxTEU</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
-      <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="863622d1-29ad-407b-9717-f1563522bdd0">
+    <Attribute dwd:design-time-name="b11648d4-8d52-4612-a3f8-3257b5e13163">
       <ID>Speed In Knots</ID>
       <Name>Speed In Knots</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="5a6d0b27-016d-4185-9771-633de81df0e4">
+        <KeyColumn dwd:design-time-name="63ac831d-9c6d-4702-adda-959a7947d2aa">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="f6545a7a-264c-4bcf-9e29-999e6f73c635">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="e3ceaa79-9824-44b1-a5c2-34074063ead9">
             <TableID>dbo_D_Ship</TableID>
             <ColumnID>SpeedInKnots</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
-      <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="444e62dc-9f9a-4de8-937b-d2ba08f2c4bc">
+    <Attribute dwd:design-time-name="48501bc2-0aca-4a0b-a975-4a87bd95028b">
       <ID>Speed In Km H</ID>
       <Name>Speed In Km H</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="1f6ba955-c371-451e-b915-f50389fd2eeb">
+        <KeyColumn dwd:design-time-name="7e260843-a184-4c4d-b666-b1ce338032c0">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="67822cca-0a68-4f66-93ab-51f996612f0a">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="dc38014d-b86f-4407-87cb-9f8b20ae076c">
             <TableID>dbo_D_Ship</TableID>
             <ColumnID>SpeedInKm_H</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
-      <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="08cd9295-55cd-4f9b-83a2-f1e11a62b571">
+    <Attribute dwd:design-time-name="20901104-0aea-4cc0-8f20-30b658289d0b">
       <ID>Country</ID>
       <Name>Country</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="7bf643a9-78ec-4b51-ac9c-16361c99d1f1">
+        <KeyColumn dwd:design-time-name="a76b2702-e939-4f28-be29-e4eb4f9aa2ef">
           <DataType>WChar</DataType>
           <DataSize>50</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="daa5a152-8935-4c36-8d48-7ee8df963e78">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="8f2b4d1d-bac1-4a3a-86aa-70dd0f2b3126">
             <TableID>dbo_D_Ship</TableID>
             <ColumnID>Country</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
-      <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="2b20a6de-dadb-41d6-817d-d0bc6f6dc729">
+    <Attribute dwd:design-time-name="ad1ac54c-28e8-4cd6-be16-a61b3f6f67f0">
       <ID>Yearcost</ID>
       <Name>Yearcost</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="e650e13d-f007-4190-8f3b-2e80ecb3a50f">
+        <KeyColumn dwd:design-time-name="d46f6232-bb5b-4d35-a218-9fadeefc0949">
           <DataType>Double</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="446c29a6-2450-4b16-bb46-eb22f4b6ff53">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c43bdbcc-0229-49b3-97ca-2267f1942a60">
             <TableID>dbo_D_Ship</TableID>
             <ColumnID>Yearcost</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
-      <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="d4fcd277-8cec-4013-b7aa-7485f3e7c14c">
+    <Attribute dwd:design-time-name="57d7237e-771a-4336-a953-f21566fec620">
       <ID>Length</ID>
       <Name>Length</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="87ffdca2-ebb7-470c-afa9-022d722c2087">
+        <KeyColumn dwd:design-time-name="2db94c83-5590-461c-bb93-0b8910645ae1">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="0fcf0429-a9fe-4d13-af10-902dc8aeb512">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="75b418cd-2b78-4b36-8111-01277c54f246">
             <TableID>dbo_D_Ship</TableID>
             <ColumnID>Length</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
-      <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="2324a6b7-0430-4fd9-a1e6-e9bbded39cdc">
+    <Attribute dwd:design-time-name="59531106-ac34-4cb4-b0ee-08196cc8e1a0">
       <ID>Start Date</ID>
       <Name>Start Date</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="f6853516-6bb1-4fba-b6d9-ecec9d1a089c">
+        <KeyColumn dwd:design-time-name="71e7a59c-3ed8-41c5-8ec6-20c0820f412d">
           <DataType>Date</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="b0f13f0d-4eba-4bb9-85f1-2a7468af90cd">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="ccc24834-19b6-4baf-9525-9ad4c0ba9a4d">
             <TableID>dbo_D_Ship</TableID>
             <ColumnID>Start_Date</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
-      <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="ba9c361c-c975-4e07-b428-6d67cab29c7f">
+    <Attribute dwd:design-time-name="37cb7791-2080-48f0-8e60-65e9fe4c0780">
       <ID>End Date</ID>
       <Name>End Date</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="2a6982f9-8102-441b-9303-e6b77d73a9d2">
+        <KeyColumn dwd:design-time-name="80f983fe-a306-4675-85c5-98f647603eaf">
           <DataType>Date</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="fd688f64-2e18-4bf0-af76-89573cab477f">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="6bca21cd-43e1-4d74-955c-9d0bfb719d20">
             <TableID>dbo_D_Ship</TableID>
             <ColumnID>End_Date</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
-      <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
