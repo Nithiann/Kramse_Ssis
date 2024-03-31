@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="2  Raw to ERP"
   DTS:PackageType="5"
-  DTS:VersionBuild="129"
-  DTS:VersionGUID="{657BEFD1-D047-4D71-A389-27CA7A0D98F8}">
+  DTS:VersionBuild="130"
+  DTS:VersionGUID="{934EA2B1-9CE3-4DAD-981C-A8E1A6A0A1D6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -2331,6 +2331,30 @@ where [refTable].[Country] = ?</property>
                       cachedDataType="i4"
                       cachedName="P_DistanceFromPiraeus"
                       lineageId="Package\Load Port\OLE DB Source.Outputs[OLE DB Source Output].Columns[P_DistanceFromPiraeus]" />
+                    <inputColumn
+                      refId="Package\Load Port\Convert distance to seamiles.Inputs[Derived Column Input].Columns[P_PortOrder]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="P_PortOrder"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load Port\OLE DB Source.Outputs[OLE DB Source Output].Columns[P_PortOrder]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)#{Package\Load Port\OLE DB Source.Outputs[OLE DB Source Output].Columns[P_PortOrder]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)P_PortOrder</property>
+                      </properties>
+                    </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -2867,8 +2891,7 @@ where [refTable].[Country] = ?</property>
                     isUsed="True">
                     <externalMetadataColumn
                       refId="Package\Load Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[P_PortOrder]"
-                      dataType="wstr"
-                      length="50"
+                      dataType="i4"
                       name="P_PortOrder" />
                     <externalMetadataColumn
                       refId="Package\Load Port\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VPS_PortId]"
@@ -7428,9 +7451,7 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -7524,9 +7545,7 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -7548,9 +7567,7 @@ where [refTable].[Name] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

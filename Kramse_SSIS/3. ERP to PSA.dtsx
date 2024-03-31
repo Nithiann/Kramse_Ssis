@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="3  ERP to PSA"
   DTS:PackageType="5"
-  DTS:VersionBuild="58"
-  DTS:VersionGUID="{4DCC4C20-C741-414C-A025-7440040C9838}">
+  DTS:VersionBuild="60"
+  DTS:VersionGUID="{9BEA4945-C6C7-4458-BE43-79A0BCECB81D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -4130,12 +4130,6 @@
                       externalMetadataColumnId="Package\F_Shipment\F_ShipmentVoyage.Inputs[OLE DB Destination Input].ExternalColumns[ConsignorId]"
                       lineageId="Package\F_Shipment\Merge Join ShipmentVoyage.Outputs[Merge Join Output].Columns[ConsignorId]" />
                     <inputColumn
-                      refId="Package\F_Shipment\F_ShipmentVoyage.Inputs[OLE DB Destination Input].Columns[DistanceSeaMiles]"
-                      cachedDataType="r8"
-                      cachedName="DistanceSeaMiles"
-                      externalMetadataColumnId="Package\F_Shipment\F_ShipmentVoyage.Inputs[OLE DB Destination Input].ExternalColumns[DistanceSeaMiles]"
-                      lineageId="Package\F_Shipment\Merge Join ShipmentVoyage.Outputs[Merge Join Output].Columns[DistanceSeaMiles]" />
-                    <inputColumn
                       refId="Package\F_Shipment\F_ShipmentVoyage.Inputs[OLE DB Destination Input].Columns[VS_ShipId]"
                       cachedDataType="i4"
                       cachedName="VS_ShipId"
@@ -4207,6 +4201,12 @@
                       cachedName="RevenueWithDiscount"
                       externalMetadataColumnId="Package\F_Shipment\F_ShipmentVoyage.Inputs[OLE DB Destination Input].ExternalColumns[RevenueWithDiscount]"
                       lineageId="Package\F_Shipment\Calculate LoadFactor.Outputs[Derived Column Output].Columns[RevenueWithDiscount]" />
+                    <inputColumn
+                      refId="Package\F_Shipment\F_ShipmentVoyage.Inputs[OLE DB Destination Input].Columns[Vp_Traject_Distance_Sea_Miles]"
+                      cachedDataType="r8"
+                      cachedName="Vp_Traject_Distance_Sea_Miles"
+                      externalMetadataColumnId="Package\F_Shipment\F_ShipmentVoyage.Inputs[OLE DB Destination Input].ExternalColumns[DistanceSeaMiles]"
+                      lineageId="Package\F_Shipment\Merge Join ShipmentVoyage.Outputs[Merge Join Output].Columns[Vp_Traject_Distance_Sea_Miles]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -7999,9 +7999,7 @@ where [refTable].[Id] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-33.3499983087182,5,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
